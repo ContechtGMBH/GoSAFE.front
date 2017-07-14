@@ -4,7 +4,8 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import allReducers from './reducers/index';
 import App from './App';
-import './index.css';
+import './styles/index.css';
+import './styles/loader.css';
 
 import "cesium/Source/Widgets/widgets.css";
 

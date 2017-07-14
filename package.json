@@ -48,6 +48,7 @@
     "whatwg-fetch": "2.0.2"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "cesium": "^1.30.0",
     "react": "^15.4.2",
     "react-d3-basic": "^1.6.11",

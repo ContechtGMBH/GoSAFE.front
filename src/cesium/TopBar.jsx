@@ -10,12 +10,10 @@ export default class TopBar extends Component {
         return (
             <div className="top-bar">
                 <div className="menu" onClick={this.test}>
-                  <div></div>
-                  <div></div>
-                  <div></div>
+
                 </div>
                 <div className="user">
-                  Place for user menu
+                  User menu goes here
                 </div>
             </div>
         );

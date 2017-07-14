@@ -4,7 +4,7 @@ import {Component} from "react";
 
 import Cesium, {BillboardCollection} from "cesium/Source/Cesium";
 
-import fireflyIcon from "../assets/Firefly.png";
+import logo from "../assets/logo.png";
 
 export default class CesiumBillboard extends Component {
     componentDidMount() {
@@ -18,7 +18,7 @@ export default class CesiumBillboard extends Component {
 
         this.billboard = this.billboards.add({
             position : Cesium.Cartesian3.fromDegrees(-117.0, 35.0, 10000),
-            image: fireflyIcon
+            image: logo
             //scale : 0.5
         });
     }
