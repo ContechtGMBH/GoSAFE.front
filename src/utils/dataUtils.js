@@ -2,7 +2,7 @@ import axios from "axios";
 
 import GeoJsonDataSource from "cesium/Source/DataSources/GeoJsonDataSource";
 
-const __API_URL__ = 'http://localhost:3000/';
+const __API_URL__ = 'http://localhost:3000/data/';
 
 module.exports = {
 
