@@ -1,4 +1,4 @@
-## Cesium+React+Webpack
+# GoSAFE RAIL frontend
 
 How to:
 ```
