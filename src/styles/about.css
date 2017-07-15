@@ -1,0 +1,48 @@
+.panel-about {
+  position: absolute;
+  top: 35px;
+  background: rgba(42, 42, 42, 0.9);
+
+  border-radius: 17px;
+  color: #fff;
+  width: 400px;
+  height: 400px;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
+}
+
+.panel-about > h4 {
+  text-align: center;
+}
+
+.panel-about > span {
+  padding: 10px;
+}
+
+.close {
+  width: 60px;
+  height: 35px;
+  position:absolute;
+  bottom:0;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 35px;
+
+}
+
+.close:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}

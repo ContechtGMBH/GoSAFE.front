@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "async": "^2.5.0",
+    "axios": "^0.16.2",
     "cesium": "^1.30.0",
     "react": "^15.4.2",
     "react-d3-basic": "^1.6.11",

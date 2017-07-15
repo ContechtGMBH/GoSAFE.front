@@ -6,6 +6,8 @@ import allReducers from './reducers/index';
 import App from './App';
 import './styles/index.css';
 import './styles/loader.css';
+import './styles/panel.css';
+import './styles/about.css';
 
 import "cesium/Source/Widgets/widgets.css";
 

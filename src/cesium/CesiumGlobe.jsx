@@ -5,6 +5,8 @@ import Viewer from "cesium/Source/Widgets/Viewer/Viewer";
 import Cesium from "cesium/Source/Cesium";
 
 import TopBar from "./TopBar"
+import Panel from "./Panel";
+import About from "./About";
 import CesiumBillboard from "./CesiumBillboard";
 import CesiumDatasources from "./CesiumDatasources";
 
@@ -92,6 +94,8 @@ class CesiumGlobe extends Component {
         return (
             <div>
             <TopBar />
+            <Panel/>
+            <About/>
                 <div className="cesiumGlobeWrapper" style={containerStyle}>
                     <div
                         className="cesiumWidget"

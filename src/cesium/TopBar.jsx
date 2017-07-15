@@ -1,6 +1,10 @@
 import React, {Component} from "react";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default class TopBar extends Component {
+import {togglePanel} from '../actions/index'
+
+class TopBar extends Component {
 
   test() {
     console.log('test')
@@ -9,7 +13,7 @@ export default class TopBar extends Component {
     render() {
         return (
             <div className="top-bar">
-                <div className="menu" onClick={this.test}>
+                <div className="menu" onClick={() => this.props.togglePanel(this.props.panel.display)}>
 
                 </div>
                 <div className="user">
@@ -19,3 +23,13 @@ export default class TopBar extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {panel: state.panel, about: state.about}
+}
+
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({togglePanel: togglePanel}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(TopBar);
