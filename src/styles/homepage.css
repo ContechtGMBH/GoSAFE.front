@@ -1,0 +1,39 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(#404142, #F8BC28);
+}
+
+.container {
+    text-align: center;
+    color: #fff;
+    font-family: "sans-serif";
+}
+
+.logo {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.start {
+    background-color: #F8BC2A;
+    color: #fff;
+    padding: 25px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.start:hover, .start:active {
+    background-color: #555;
+}
