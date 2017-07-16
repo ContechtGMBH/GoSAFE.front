@@ -10,18 +10,26 @@ class About extends Component {
     render() {
             if (this.props.about.display) {
               return (
-                  <Draggable>
+                  <Draggable cancel=".panel-content">
                       <div className="panel-about">
-                          <h4>GoSafe Rail Visualization Platform</h4>
-                          <hr/>
-                          <span>Authors: Damian Michal Harasymczuk</span>
-                          <br/>
-                          <span>Company: Contecht GMBH</span>
-                          <br/>
-                          <span>Contact: harasymczuk@contecht.eu</span>
-                          <br/>
-                          <span>License: MIT</span>
-                          <div className="close" onClick={() => this.props.toggleAbout(this.props.about.display)}>Close</div>
+                          <div className="header">
+                              <div className="title">About</div>
+                          </div>
+                          <div className="panel-content">
+                              <span className="about-info">Authors: Damian Michal Harasymczuk</span>
+                              <br/>
+                              <span className="about-info">Company: Contecht GMBH</span>
+                              <br/>
+                              <span className="about-info">Contact: harasymczuk@contecht.eu</span>
+                              <br/>
+                              <span className="about-info">License: MIT</span>
+                          </div>
+
+                          <div className="footer">
+                              <div className="btn-container">
+                                  <div className="close" onClick={() => this.props.toggleAbout(this.props.about.display)}>Close</div>
+                              </div>
+                          </div>
                       </div>
                   </Draggable>
               );

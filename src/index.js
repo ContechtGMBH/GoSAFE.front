@@ -9,6 +9,7 @@ import './styles/loader.css';
 import './styles/panel.css';
 import './styles/about.css';
 import './styles/homepage.css';
+import './styles/layers.css';
 
 import "cesium/Source/Widgets/widgets.css";
 

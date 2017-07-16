@@ -7,6 +7,8 @@ import Cesium from "cesium/Source/Cesium";
 import TopBar from "./TopBar"
 import Panel from "./Panel";
 import About from "./About";
+import Layers from "./Layers";
+
 import CesiumBillboard from "./CesiumBillboard";
 import CesiumDatasources from "./CesiumDatasources";
 
@@ -95,6 +97,7 @@ class CesiumGlobe extends Component {
             <div>
             <TopBar />
             <Panel/>
+            <Layers/>
             <About/>
                 <div className="cesiumGlobeWrapper" style={containerStyle}>
                     <div

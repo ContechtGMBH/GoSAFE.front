@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 
-import TestReducers from './reducer-test';
+import LayersReducers from './reducer-layers';
 import PanelReducers from './reducer-panel';
 import AboutReducers from './reducer-about';
 
 export const allReducers = combineReducers({
-  test: TestReducers,
+  layers: LayersReducers,
   panel: PanelReducers,
   about: AboutReducers
 });

@@ -11,3 +11,10 @@ export const toggleAbout = condition => {
     payload: !condition
   }
 }
+
+export const toggleLayers = condition => {
+  return {
+    type: 'TOGGLE_LAYERS',
+    payload: !condition
+  }
+}
