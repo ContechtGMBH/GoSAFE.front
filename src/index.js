@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 import allReducers from './reducers/index';
 import App from './App';
 import './styles/index.css';
@@ -17,7 +18,7 @@ import buildModuleUrl from "cesium/Source/Core/buildModuleUrl";
 
 buildModuleUrl.setBaseUrl('./cesium/');
 
-const store = createStore(allReducers);
+const store = createStore(allReducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

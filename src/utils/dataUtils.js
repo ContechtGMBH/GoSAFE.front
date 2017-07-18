@@ -1,22 +1,14 @@
 import axios from "axios";
+import {endpoint} from '../../config/endpoints'
 
-import GeoJsonDataSource from "cesium/Source/DataSources/GeoJsonDataSource";
-
-const __API_URL__ = 'http://localhost:3000/data/';
+const __API_URL__ = endpoint + 'data/';
 
 module.exports = {
 
-    getLayer: function(dataSourcesObject, endpoint, style, callback){
+    getLayer: function(endpoint, style, callback){
         axios.get(__API_URL__ + endpoint)
             .then(function(response){
-
-                let layer = new GeoJsonDataSource.load(response.data, style);
-
-                if (dataSourcesObject) {
-                    dataSourcesObject.add(layer);
-                }
-
-                callback(null, endpoint)
+                callback(null, {data: response.data, style: style})
             })
             .catch(function(error){
                 console.log(error)

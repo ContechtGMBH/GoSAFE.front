@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import Viewer from "cesium/Source/Widgets/Viewer/Viewer";
 import Cesium from "cesium/Source/Cesium";
@@ -9,58 +10,61 @@ import Panel from "./Panel";
 import About from "./About";
 import Layers from "./Layers";
 
+import {getBasicData, getExtendedData} from '../actions/index'
+
 import CesiumBillboard from "./CesiumBillboard";
 import CesiumDatasources from "./CesiumDatasources";
 
 class CesiumGlobe extends Component {
-    constructor (props){
-      super(props);
+    constructor(props) {
+        super(props);
 
-      this.state = {
-          viewerLoaded : false,
-      }
+        this.state = {
+            viewerLoaded: false
+        }
     }
-
 
     componentDidMount() {
 
         this.viewer = new Viewer(this.cesiumContainer, {
-            animation : false,
+            animation: false,
             //baseLayerPicker : false,
             //fullscreenButton : false,
             //geocoder : false,
-            homeButton : false,
+            homeButton: false,
             //infoBox : false,
-            sceneModePicker : false,
+            sceneModePicker: false,
             //selectionIndicator : true,
-            timeline : false,
-            navigationHelpButton : false,
+            timeline: false,
+            navigationHelpButton: false,
             //scene3DOnly : true,
             //imageryProvider,
             //terrainProvider,
         });
 
-        this.viewer.camera.flyTo({destination : Cesium.Cartesian3.fromDegrees(-8.484, 54.272, 1500.0)})
+        this.props.getBasicData(this.viewer.dataSources);
+
+        this.viewer.camera.flyTo({
+            destination: Cesium.Cartesian3.fromDegrees(-8.484, 54.272, 1500.0)
+        })
 
         // Force immediate re-render now that the Cesium viewer is created
-        this.setState({viewerLoaded : true}); // eslint-disable-line react/no-did-mount-set-state
+        this.setState({viewerLoaded: true}); // eslint-disable-line react/no-did-mount-set-state
     }
 
     componentWillUnmount() {
-        if(this.viewer) {
+        if (this.viewer) {
             this.viewer.destroy();
         }
     }
-
 
     renderContents() {
         const {viewerLoaded} = this.state;
         let contents = null;
 
-        if(viewerLoaded) {
+        if (viewerLoaded) {
             contents = (
-                <span>
-                </span>
+                <span></span>
             );
         }
 
@@ -77,34 +81,34 @@ class CesiumGlobe extends Component {
             bottom: 0,
             right: 0,
             position: 'fixed',
-            display : "flex",
+            display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
-            alignItems : "stretch",
+            alignItems: "stretch"
         };
 
         const widgetStyle = {
-            flexGrow : 2
+            flexGrow: 2
         }
 
         const contents = this.renderContents()
         //console.log(this.props)
 
-        const billboard = (this.viewer) ? <CesiumBillboard scene={this.viewer.scene} /> : null;
-        const dataSources = (this.viewer) ? <CesiumDatasources dataSources={this.viewer.dataSources} /> : null;
+        const billboard = (this.viewer)
+            ? <CesiumBillboard scene={this.viewer.scene}/>
+            : null;
+        const dataSources = (this.viewer)
+            ? <CesiumDatasources dataSources={this.props.dataSources.dataSources}/>
+            : null;
 
         return (
             <div>
-            <TopBar />
-            <Panel/>
-            <Layers/>
-            <About/>
+                <TopBar/>
+                <Panel/>
+                <Layers/>
+                <About/>
                 <div className="cesiumGlobeWrapper" style={containerStyle}>
-                    <div
-                        className="cesiumWidget"
-                        ref={ element => this.cesiumContainer = element }
-                        style={widgetStyle}
-                    >
+                    <div className="cesiumWidget" ref={element => this.cesiumContainer = element} style={widgetStyle}>
                         {contents}
                         {billboard}
                         {dataSources}
@@ -115,10 +119,15 @@ class CesiumGlobe extends Component {
     }
 }
 
-function mapStateToProps(state){
-  return {
-    testing: state.test
-  }
+function mapStateToProps(state) {
+    return {dataSources: state.dataSources}
 }
 
-export default connect(mapStateToProps)(CesiumGlobe);
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
+        getBasicData: getBasicData,
+        getExtendedData: getExtendedData
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(CesiumGlobe);

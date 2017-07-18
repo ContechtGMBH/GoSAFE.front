@@ -1,5 +1,15 @@
 {
   "name": "gosafe.front",
+  "repository" : { 
+      "type" : "git",
+      "url" : "https://github.com/ContechtGMBH/GoSAFE.front.git"
+  },
+  "author": {
+      "name" : "Damian Michal Harasymczuk",
+      "email" : "harasymczuk@contecht.eu",
+      "url" : "https://github.com/dmh126"
+  },
+  "license": "MIT",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -59,6 +69,7 @@
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-tooltip": "^3.3.0",
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.2"
   },

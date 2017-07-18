@@ -1,7 +1,9 @@
 import Color from "cesium/Source/Core/Color";
 
 module.exports = {
-    default: {},
+    default: {
+        // clampToGround: true
+    },
 
     blueTrain: {
         strokeWidth: 1,
