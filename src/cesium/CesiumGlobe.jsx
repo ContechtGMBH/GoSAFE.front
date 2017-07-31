@@ -9,8 +9,11 @@ import TopBar from "./TopBar"
 import Panel from "./Panel";
 import About from "./About";
 import Layers from "./Layers";
+import FeatureInfo from './FeatureInfo';
 
-import {getBasicData, getExtendedData} from '../actions/index'
+import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature} from '../actions/index'
+
+const eventsUtils = require('../utils/eventsUtils');
 
 import CesiumBillboard from "./CesiumBillboard";
 import CesiumDatasources from "./CesiumDatasources";
@@ -26,13 +29,15 @@ class CesiumGlobe extends Component {
 
     componentDidMount() {
 
+        const props = this.props;
+
         this.viewer = new Viewer(this.cesiumContainer, {
             animation: false,
             //baseLayerPicker : false,
             //fullscreenButton : false,
             //geocoder : false,
             homeButton: false,
-            //infoBox : false,
+            infoBox : false,
             sceneModePicker: false,
             //selectionIndicator : true,
             timeline: false,
@@ -42,8 +47,29 @@ class CesiumGlobe extends Component {
             //terrainProvider,
         });
 
-        this.props.getBasicData(this.viewer.dataSources);
+        // basic dataset by default
+        props.getBasicData(this.viewer.dataSources);
 
+        const scene = this.viewer.scene;
+
+        // LMB click events, by default feature info
+        this.viewer.screenSpaceEventHandler.setInputAction(function(movement) {
+
+            switch(props.events.lmb) {
+                case 'FEATUREINFO':
+                    eventsUtils.toggleFeatureInfo(props, scene, movement);
+                    break
+                case 'NEWFEATURE':
+                    eventsUtils.addNewFeature();
+                    break
+                default:
+                    eventsUtils.toggleFeatureInfo(props, scene, movement);
+                    break
+            }
+
+        }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+
+        // camera
         this.viewer.camera.flyTo({
             destination: Cesium.Cartesian3.fromDegrees(-8.484, 54.272, 1500.0)
         })
@@ -107,6 +133,7 @@ class CesiumGlobe extends Component {
                 <Panel/>
                 <Layers/>
                 <About/>
+                <FeatureInfo/>
                 <div className="cesiumGlobeWrapper" style={containerStyle}>
                     <div className="cesiumWidget" ref={element => this.cesiumContainer = element} style={widgetStyle}>
                         {contents}
@@ -120,13 +147,19 @@ class CesiumGlobe extends Component {
 }
 
 function mapStateToProps(state) {
-    return {dataSources: state.dataSources}
+    return {
+        dataSources: state.dataSources,
+        featureInfo: state.featureInfo,
+        events: state.events
+    }
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getBasicData: getBasicData,
-        getExtendedData: getExtendedData
+        getExtendedData: getExtendedData,
+        toggleFeatureInfo: toggleFeatureInfo,
+        selectFeature: selectFeature
     }, dispatch)
 }
 

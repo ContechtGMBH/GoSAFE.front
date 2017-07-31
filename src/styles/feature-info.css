@@ -1,0 +1,33 @@
+.panel-feature-info {
+  position: relative;
+  top: 35px;
+  background: rgba(42, 42, 42, 0.9);
+
+  border-radius: 17px;
+  color: #fff;
+  width: 20%;
+  height: 400px;
+  z-index: 10;
+  position: fixed;
+  top: 15%;
+  left: 75%;
+  /*
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
+  */
+}
+
+.properties-table {
+    width: 100%;
+    border-spacing: 5px;
+    border-collapse: separate;
+}
+
+td {
+    padding: 3px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/*tr:nth-child(even) {background: rgba(0, 0, 0, 0.6)}*/

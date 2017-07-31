@@ -2,6 +2,7 @@ import Color from "cesium/Source/Core/Color";
 
 module.exports = {
     default: {
+        stroke: Color.YELLOW
         // clampToGround: true
     },
 
