@@ -11,7 +11,8 @@ import './styles/panel.css';
 import './styles/about.css';
 import './styles/homepage.css';
 import './styles/layers.css';
-import './styles/feature-info.css'
+import './styles/feature-info.css';
+import './styles/statistics.css';
 
 import "cesium/Source/Widgets/widgets.css";
 

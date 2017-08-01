@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {togglePanel, toggleAbout, toggleLayers} from '../actions/index'
+import {togglePanel, toggleAbout, toggleLayers, toggleStatistics} from '../actions/index'
 
 class Panel extends Component {
 
@@ -19,7 +19,10 @@ class Panel extends Component {
                     <div className="panel-module disabled" onClick={() => this.props.togglePanel(this.props.panel.display)}>
                         Analysis
                     </div>
-                    <div className="panel-module disabled" onClick={() => this.props.togglePanel(this.props.panel.display)}>
+                    <div className="panel-module" onClick={() => {
+                      this.props.togglePanel(this.props.panel.display);
+                      this.props.toggleStatistics(this.props.statistics.display);
+                    }}>
                         Statistics
                     </div>
                     <div className="panel-module disabled" onClick={() => this.props.togglePanel(this.props.panel.display)}>
@@ -48,12 +51,18 @@ function mapStateToProps(state) {
     return {
       panel: state.panel,
       about: state.about,
-      layers: state.layers
+      layers: state.layers,
+      statistics: state.statistics
     }
 }
 
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({togglePanel: togglePanel, toggleAbout: toggleAbout, toggleLayers: toggleLayers}, dispatch)
+    return bindActionCreators({
+      togglePanel: togglePanel,
+      toggleAbout: toggleAbout,
+      toggleLayers: toggleLayers,
+      toggleStatistics: toggleStatistics
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Panel);

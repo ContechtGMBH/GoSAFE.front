@@ -10,6 +10,7 @@ import Panel from "./Panel";
 import About from "./About";
 import Layers from "./Layers";
 import FeatureInfo from './FeatureInfo';
+import Statistics from './Statistics';
 
 import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature} from '../actions/index'
 
@@ -134,6 +135,7 @@ class CesiumGlobe extends Component {
                 <Layers/>
                 <About/>
                 <FeatureInfo/>
+                <Statistics/>
                 <div className="cesiumGlobeWrapper" style={containerStyle}>
                     <div className="cesiumWidget" ref={element => this.cesiumContainer = element} style={widgetStyle}>
                         {contents}

@@ -7,6 +7,8 @@ import DataSourcesReducers from './reducer-datasources';
 import FeatureInfoReducers from './reducer-featureinfo';
 import EventsReducers from './reducer-events';
 import SelectedFeatureReducers from './reducer-selectedfeature';
+import StatisticsReducers from './reducer-statistics';
+import DatasetsReducers from './reducer-datasets';
 
 export const allReducers = combineReducers({
   layers: LayersReducers,
@@ -15,7 +17,9 @@ export const allReducers = combineReducers({
   about: AboutReducers,
   dataSources: DataSourcesReducers,
   featureInfo: FeatureInfoReducers,
-  selectedFeature: SelectedFeatureReducers 
+  selectedFeature: SelectedFeatureReducers,
+  statistics: StatisticsReducers,
+  datasets: DatasetsReducers
 
 });
 

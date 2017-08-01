@@ -1,0 +1,57 @@
+.panel-statistics {
+  position: relative;
+  top: 35px;
+  background: rgba(42, 42, 42, 0.9);
+
+  border-radius: 17px;
+  color: #fff;
+  width: 900px;
+  height: 600px;
+  z-index: 10;
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  /*
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
+  */
+}
+
+.chart-controls {
+  display: inline-block;
+  vertical-align:top;
+  padding: 5%;
+  width: 40%;
+  height: 80%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.combobox {
+  background: rgba(42, 42, 42, 0.9);
+  color: #ffffff;
+  width: 125px;
+  height: 35px;
+}
+
+.chart {
+  display: inline-block;
+  padding: 5%;
+  width: 40%;
+  height: 80%;
+  background: rgba(0, 0, 0, 0.4);
+
+}
+
+.axisWhite line{
+  stroke: White;
+}
+
+.axisWhite path{
+  stroke: White;
+}
+
+.axisWhite text{
+  fill: White;
+}

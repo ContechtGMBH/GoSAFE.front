@@ -1,5 +1,3 @@
-import Cesium from "cesium/Source/Cesium";
-
 export const selectFeature = feature => {
     let properties = {};
     let propertiesNames = feature.id.properties.propertyNames;

@@ -25,3 +25,10 @@ export const toggleFeatureInfo = condition => {
         payload: !condition
     }
 }
+
+export const toggleStatistics = condition => {
+    return {
+        type: 'TOGGLE_STATISTICS',
+        payload: !condition
+    }
+}
