@@ -7,6 +7,7 @@ module.exports = {
         if (Cesium.defined(feature)){
             props.toggleFeatureInfo(props.featureInfo.display);
             props.selectFeature(feature);
+            console.log(movement)
             //let properties = feature.id.properties.propertyNames;
             //properties.forEach(function(p){console.log(p + " : " + feature.id.properties[p])})
         }

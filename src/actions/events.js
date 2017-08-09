@@ -1,4 +1,5 @@
 export const selectFeature = feature => {
+    console.log(feature)
     let properties = {};
     let propertiesNames = feature.id.properties.propertyNames;
     propertiesNames.forEach(function(p){

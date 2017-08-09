@@ -28,7 +28,7 @@ export const getBasicData = (dataSourcesObject) => {
 
         series([
                 function(callback) {
-                    dataUtils.getLayer('tracks', layersStyles.default, function(err, data) {
+                    dataUtils.getLayer('tracks', layersStyles.yellowSubmarine, function(err, data) {
                         callback(null, data);
                     })
                 },
@@ -54,12 +54,12 @@ export const getExtendedData = (dataSourcesObject) => {
 
         series([
                 function(callback) {
-                    dataUtils.getLayer('tracks', layersStyles.default, function(err, data) {
+                    dataUtils.getLayer('tracks', layersStyles.yellowSubmarine, function(err, data) {
                         callback(null, data);
                     })
                 },
                 function(callback) {
-                    dataUtils.getLayer('platforms', layersStyles.redThick, function(err, data) {
+                    dataUtils.getLayer('platforms', layersStyles.redOctober, function(err, data) {
                         callback(null, data);
                     })
                 },
@@ -67,7 +67,12 @@ export const getExtendedData = (dataSourcesObject) => {
                     dataUtils.getLayer('signals', layersStyles.blueTrain, function(err, data) {
                         callback(null, data);
                     })
-                }
+                },
+                function(callback) {
+                    dataUtils.getLayer('counties', layersStyles.stPatrick, function(err, data) {
+                        callback(null, data);
+                    })
+                },
             ],
 
             function(error, results) {

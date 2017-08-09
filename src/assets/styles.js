@@ -1,7 +1,7 @@
 import Color from "cesium/Source/Core/Color";
 
 module.exports = {
-    default: {
+    yellowSubmarine: {
         stroke: Color.YELLOW
         // clampToGround: true
     },
@@ -12,8 +12,14 @@ module.exports = {
         markerColor: Color.BLUE
     },
 
-    redThick: {
+    redOctober: {
         stroke: Color.RED,
         strokeWidth: 10
+    },
+
+    stPatrick: {
+        stroke: Color.CHARTREUSE,
+        fill: Color.GREEN.withAlpha(0.5),
+        strokeWidth: 3
     }
 }

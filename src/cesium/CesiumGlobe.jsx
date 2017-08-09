@@ -68,7 +68,7 @@ class CesiumGlobe extends Component {
                     break
             }
 
-        }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
         // camera
         this.viewer.camera.flyTo({
