@@ -28,6 +28,14 @@ class CesiumGlobe extends Component {
         }
     }
 
+    componentWillMount() {
+        if (localStorage.user === 'authorized'){
+            console.log('Welcome to GoSafe Visualization Platform')
+        } else {
+            this.props.history.push('/');
+        }
+    }
+
     componentDidMount() {
 
         const props = this.props;
