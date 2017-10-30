@@ -9,6 +9,7 @@ import EventsReducers from './reducer-events';
 import SelectedFeatureReducers from './reducer-selectedfeature';
 import StatisticsReducers from './reducer-statistics';
 import DatasetsReducers from './reducer-datasets';
+import RailmlReducers from './reducer-railml';
 
 export const allReducers = combineReducers({
   layers: LayersReducers,
@@ -19,7 +20,8 @@ export const allReducers = combineReducers({
   featureInfo: FeatureInfoReducers,
   selectedFeature: SelectedFeatureReducers,
   statistics: StatisticsReducers,
-  datasets: DatasetsReducers
+  datasets: DatasetsReducers,
+  railml: RailmlReducers
 
 });
 

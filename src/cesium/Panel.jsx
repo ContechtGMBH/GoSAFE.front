@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {togglePanel, toggleAbout, toggleLayers, toggleStatistics} from '../actions/index'
+import {togglePanel, toggleAbout, toggleLayers, toggleStatistics, toggleRailml} from '../actions/index'
 
 class Panel extends Component {
 
@@ -31,6 +31,12 @@ class Panel extends Component {
                     <div className="panel-module disabled" onClick={() => this.props.togglePanel(this.props.panel.display)}>
                         Search
                     </div>
+                    <div className="panel-module" onClick={() => {
+                      this.props.togglePanel(this.props.panel.display)
+                      this.props.toggleRailml(this.props.railml.display)
+                    }}>
+                        RailML
+                    </div>
                     <hr/>
                     <div className="panel-module about" onClick={() => {
                       this.props.togglePanel(this.props.panel.display);
@@ -52,7 +58,8 @@ function mapStateToProps(state) {
       panel: state.panel,
       about: state.about,
       layers: state.layers,
-      statistics: state.statistics
+      statistics: state.statistics,
+      railml: state.railml
     }
 }
 
@@ -61,7 +68,8 @@ function matchDispatchToProps(dispatch){
       togglePanel: togglePanel,
       toggleAbout: toggleAbout,
       toggleLayers: toggleLayers,
-      toggleStatistics: toggleStatistics
+      toggleStatistics: toggleStatistics,
+      toggleRailml: toggleRailml
     }, dispatch)
 }
 

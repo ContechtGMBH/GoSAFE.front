@@ -32,3 +32,10 @@ export const toggleStatistics = condition => {
         payload: !condition
     }
 }
+
+export const toggleRailml = condition => {
+    return {
+        type: 'TOGGLE_RAILML',
+        payload: !condition
+    }
+}

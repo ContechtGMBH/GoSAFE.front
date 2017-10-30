@@ -82,3 +82,24 @@ export const getExtendedData = (dataSourcesObject) => {
         )
     }
 }
+
+export const railmlData = (file, dataSourcesObject) => {
+    return dispatch => {
+
+        dispatch(getDataRequested());
+
+        series([
+                function(callback) {
+                    dataUtils.convertRailml(file, 'api/v1/railml', layersStyles.redOctober, function(err, data) {
+                        callback(null, data)
+                    })
+                }
+            ],
+
+            function(error, results) {
+                dispatch(receivedDataSources(results, dataSourcesObject));
+            }
+
+        )
+    }
+}

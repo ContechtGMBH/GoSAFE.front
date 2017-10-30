@@ -11,10 +11,12 @@ import About from "./About";
 import Layers from "./Layers";
 import FeatureInfo from './FeatureInfo';
 import Statistics from './Statistics';
+import Railml from './Railml';
 
 import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature} from '../actions/index'
 
 const eventsUtils = require('../utils/eventsUtils');
+import Registry from '../utils/registry'
 
 import CesiumBillboard from "./CesiumBillboard";
 import CesiumDatasources from "./CesiumDatasources";
@@ -39,6 +41,9 @@ class CesiumGlobe extends Component {
     componentDidMount() {
 
         const props = this.props;
+
+        // Contecht Bing key
+        Cesium.BingMapsApi.defaultKey ='AgQvXY2xmr8TZslgExzJr3w9XWiVDqQjGABA3zSDqTrGNQzt8jQZUI1UsfnNLvVJ'
 
         this.viewer = new Viewer(this.cesiumContainer, {
             animation: false,
@@ -82,7 +87,6 @@ class CesiumGlobe extends Component {
         this.viewer.camera.flyTo({
             destination: Cesium.Cartesian3.fromDegrees(-8.484, 54.272, 1500.0)
         })
-
         // Force immediate re-render now that the Cesium viewer is created
         this.setState({viewerLoaded: true}); // eslint-disable-line react/no-did-mount-set-state
     }
@@ -144,6 +148,7 @@ class CesiumGlobe extends Component {
                 <About/>
                 <FeatureInfo/>
                 <Statistics/>
+                <Railml />
                 <div className="cesiumGlobeWrapper" style={containerStyle}>
                     <div className="cesiumWidget" ref={element => this.cesiumContainer = element} style={widgetStyle}>
                         {contents}
