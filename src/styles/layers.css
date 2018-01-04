@@ -87,10 +87,38 @@ ul {
 }
 
 li:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
 }
 
+.selected-layer {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.legend-entry {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+}
+
+.layer-overview-graduated {
+  padding: 5px;
+}
+
+.layer-overview-graduated-attribute {
+  margin-top: 10px;
+}
+
+.layer-overview-graduated-legend {
+  margin-top: 10px;
+}
+
+.layer-overview-combobox {
+  background: rgba(42, 42, 42, 0.9);
+  color: #ffffff;
+  width: 100px;
+  height: 20px;
+}
 
 .footer {
     margin: 0 auto;

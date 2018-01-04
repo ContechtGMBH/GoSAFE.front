@@ -9,7 +9,7 @@ module.exports = {
     getLayer: function(endpoint, style, callback){
         axios.get(__API_URL__ + endpoint)
             .then(function(response){
-                callback(null, {data: response.data, style: style})
+                callback(null, {data: response.data, style: style, name: endpoint})
             })
             .catch(function(error){
                 console.log(error)
@@ -22,7 +22,7 @@ module.exports = {
 
       axios.post(__RAILML_URL__ + endpoint, data)
           .then(function(response){
-            callback(null, {data: response.data, style: style})
+            callback(null, {data: response.data, style: style, name: endpoint})
           })
           .catch(function(error){
               console.log(error)

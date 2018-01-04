@@ -2,8 +2,9 @@ import Color from "cesium/Source/Core/Color";
 
 module.exports = {
     yellowSubmarine: {
-        stroke: Color.YELLOW
-        // clampToGround: true
+        stroke: Color.YELLOW,
+        // clampToGround: true,
+        strokeWidth: 5
     },
 
     blueTrain: {

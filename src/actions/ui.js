@@ -1,3 +1,5 @@
+import {closeFeatureInfoBox} from '../utils/eventsUtils'
+
 export const togglePanel = condition => {
     return {
         type: 'TOGGLE_PANEL',
@@ -20,6 +22,9 @@ export const toggleLayers = condition => {
 }
 
 export const toggleFeatureInfo = condition => {
+    if (condition) {
+      closeFeatureInfoBox()
+    }
     return {
         type: 'TOGGLE_FEATUREINFO',
         payload: !condition

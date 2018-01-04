@@ -16,7 +16,7 @@ import Railml from './Railml';
 import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature} from '../actions/index'
 
 const eventsUtils = require('../utils/eventsUtils');
-import Registry from '../utils/registry'
+//import Registry from '../utils/registry'
 
 import CesiumBillboard from "./CesiumBillboard";
 import CesiumDatasources from "./CesiumDatasources";
@@ -89,6 +89,8 @@ class CesiumGlobe extends Component {
         })
         // Force immediate re-render now that the Cesium viewer is created
         this.setState({viewerLoaded: true}); // eslint-disable-line react/no-did-mount-set-state
+
+        this.viewer.scene.debugShowFramesPerSecond = true;
     }
 
     componentWillUnmount() {
