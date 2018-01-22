@@ -28,7 +28,7 @@ class LayerOverview extends Component {
     }
 
     graduatedColors = (attribute) => {
-      let ents = this.props.dataSources._entityCollection._entities.values;
+      let ents = this.props.dataSources.entities.values;
       let attr = [];
       ents.forEach((entity) => {
         attr.push(entity.properties[attribute]._value)
@@ -79,7 +79,7 @@ class LayerOverview extends Component {
     }
 
     defaultColor = (layer) => {
-      let ents = this.props.dataSources._entityCollection._entities.values;
+      let ents = this.props.dataSources.entities.values;
       if (ents[0].polyline){
         ents.forEach((entity) => {
           entity.polyline.material.color = Cesium.Color.fromCssColorString(legend[layer])
@@ -136,7 +136,7 @@ class LayerOverview extends Component {
     render() {
       return (<div>
         <div>Layer name: {this.props.dataSources.name}</div>
-        <div>Number of features: {this.props.dataSources._entityCollection._entities.length}</div>
+        <div>Number of features: {this.props.dataSources.entities.values.length}</div>
         <div>Show: <input type="checkbox" onChange={this.showLayer} checked={this.props.dataSources.show} /></div>
         <div>-----------</div>
         <label htmlFor="default">
@@ -147,7 +147,7 @@ class LayerOverview extends Component {
         </label>
         {(this.props.dataSources.colors.style === 'graduated') && <div className="layer-overview-graduated">
           <div className="layer-overview-graduated-attribute">
-            Attribute: 
+            Attribute:
             <select className="layer-overview-combobox" onChange={(e) => this.changeStyleAttribute(e)} value={this.props.dataSources.colors.attribute}>
               <option value="gid">gid</option>
             </select>

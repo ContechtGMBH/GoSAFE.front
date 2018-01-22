@@ -24,6 +24,8 @@ module.exports = {
             props.toggleFeatureInfo(props.featureInfo.display);
             props.selectFeature(feature);
             highlited.feature = feature;
+            let {x,y,z} = feature.id.position._value
+            console.log([x,y,z])
             if (feature.id.polyline){
               if (feature.id.polyline.material.color !== Cesium.Color.CYAN){
                 highlited.color = feature.id.polyline.material.color
