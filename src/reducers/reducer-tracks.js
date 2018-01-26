@@ -1,9 +1,10 @@
 import Cesium from 'cesium/Source/Cesium';
 import Wkt from 'wicket/wicket'
-const Styles = require('../assets/styles');
+
 
 const initial = {
     dataSources: null,
+    tracks: [],
     loading: true
 };
 
@@ -11,15 +12,16 @@ export default function(state = initial, action) {
     let dataSourcesObject = action.payload;
     let container = null;
     let data = null;
+    let tracksIds = [];
     switch (action.type) {
-
-        case 'RECEIVED_ELEMENTS':
+        case 'RECEIVED_TRACKS':
+          dataSourcesObject.container.removeAll();
           container = dataSourcesObject.container;
           data = dataSourcesObject.entities.data;
           for (let entity of data){
             let coordinatesArray = []
-            let properties = Object.assign({}, entity.e.properties);
-            let label = entity.e.labels[0]
+            let properties = Object.assign({}, entity.n.properties);
+            tracksIds.push(properties.id)
             if (properties.geometry){
               let wkt = new Wkt.Wkt();
               wkt.read(properties.geometry)
@@ -29,8 +31,11 @@ export default function(state = initial, action) {
               delete properties.geometry;
               container.add({
                 id: properties.id,
-                position : Cesium.Cartesian3.fromDegrees(coordinatesArray[0], coordinatesArray[1]),
-                point: Styles[label],
+                polyline: {
+                  positions: Cesium.Cartesian3.fromDegreesArray(coordinatesArray),
+                  width : 8,
+                  material : Cesium.Color.YELLOW.withAlpha(0.7),
+                },
                 properties: properties
 
               })
@@ -39,10 +44,11 @@ export default function(state = initial, action) {
 
           return {
               dataSources: dataSourcesObject.container,
+              tracks: tracksIds,
               loading: false
           }
 
-        case 'REQUEST_ELEMENTS':
+        case 'REQUEST_TRACKS':
             return state;
 
         default:

@@ -1,7 +1,7 @@
 var endpoint;
 
 if (process.env.NODE_ENV === 'development') {
-    endpoint = 'http://localhost:3000/';
+    endpoint = 'http://localhost:3001/';
 } else if (process.env.NODE_ENV === 'production') {
     endpoint = 'https://our.production.backend.com'
 }

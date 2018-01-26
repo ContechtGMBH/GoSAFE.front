@@ -8,6 +8,7 @@ var highlited = {
 module.exports = {
 
     toggleFeatureInfo: function(props, scene, movement){
+
         if (Cesium.defined(highlited.feature)){
           if (highlited.feature.id.polyline){
             highlited.feature.id.polyline.material.color = highlited.color;
@@ -21,11 +22,10 @@ module.exports = {
         let feature = scene.pick(movement.position);
 
         if (Cesium.defined(feature)){
-            props.toggleFeatureInfo(props.featureInfo.display);
             props.selectFeature(feature);
+            props.toggleFeatureInfo(props.featureInfo.display);
+
             highlited.feature = feature;
-            let {x,y,z} = feature.id.position._value
-            console.log([x,y,z])
             if (feature.id.polyline){
               if (feature.id.polyline.material.color !== Cesium.Color.CYAN){
                 highlited.color = feature.id.polyline.material.color

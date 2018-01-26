@@ -5,7 +5,7 @@ class CesiumDatasources extends Component {
     componentDidMount() {}
 
     render() {
-        if (this.props.dataSources.loading) {
+        if (this.props.tracks.loading) {
             return (
                 <div className="cssload-bg">
                     <div id="fountainG">
@@ -30,7 +30,7 @@ class CesiumDatasources extends Component {
 }
 
 function mapStateToProps(state) {
-    return {dataSources: state.dataSources}
+    return {tracks: state.tracks}
 }
 
 export default connect(mapStateToProps)(CesiumDatasources);

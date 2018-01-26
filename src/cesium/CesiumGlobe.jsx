@@ -13,7 +13,7 @@ import FeatureInfo from './FeatureInfo';
 import Statistics from './Statistics';
 import Railml from './Railml';
 
-import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature} from '../actions/index'
+import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature, tracksData} from '../actions/index'
 
 const eventsUtils = require('../utils/eventsUtils');
 //import Registry from '../utils/registry'
@@ -62,7 +62,7 @@ class CesiumGlobe extends Component {
         });
 
         // basic dataset by default
-        props.getBasicData(this.viewer.dataSources);
+        props.tracksData(this.viewer.entities);
 
         const scene = this.viewer.scene;
 
@@ -176,7 +176,8 @@ function matchDispatchToProps(dispatch) {
         getBasicData: getBasicData,
         getExtendedData: getExtendedData,
         toggleFeatureInfo: toggleFeatureInfo,
-        selectFeature: selectFeature
+        selectFeature: selectFeature,
+        tracksData: tracksData
     }, dispatch)
 }
 

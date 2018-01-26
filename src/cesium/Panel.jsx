@@ -14,7 +14,7 @@ class Panel extends Component {
                             this.props.toggleLayers(this.props.layers.display);
                             this.props.togglePanel(this.props.panel.display);
                         }}>
-                        Layers
+                        Tracks
                     </div>
                     <div className="panel-module disabled" onClick={() => this.props.togglePanel(this.props.panel.display)}>
                         Analysis

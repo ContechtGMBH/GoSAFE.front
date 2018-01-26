@@ -14,10 +14,41 @@ export const receivedDataSources = (data, dataSourcesObject) => {
     }
 }
 
+export const receivedTracks = (data, dataSourcesObject) => {
+    return {
+        type: 'RECEIVED_TRACKS',
+        payload: {
+            entities: data,
+            container: dataSourcesObject
+        }
+    }
+}
+
+export const receivedElements = (data, dataSourcesObject) => {
+    return {
+        type: 'RECEIVED_ELEMENTS',
+        payload: {
+            entities: data,
+            container: dataSourcesObject
+        }
+    }
+}
 
 export const getDataRequested = () => {
     return {
         type: 'REQUEST_DS',
+    };
+}
+
+export const getTracksRequested = () => {
+    return {
+        type: 'REQUEST_TRACKS',
+    };
+}
+
+export const getElementsRequested = () => {
+    return {
+        type: 'REQUEST_ELEMENTS',
     };
 }
 
@@ -101,5 +132,27 @@ export const railmlData = (file, dataSourcesObject) => {
             }
 
         )
+    }
+}
+
+export const tracksData = (dataSourcesObject) => {
+    return dispatch => {
+
+        dispatch(getTracksRequested());
+
+        dataUtils.getTracks('tracks', function(err, data) {
+            dispatch(receivedTracks(data, dataSourcesObject));
+        })
+    }
+}
+
+export const elementsData = (id, dataSourcesObject) => {
+    return dispatch => {
+
+        dispatch(getElementsRequested());
+
+        dataUtils.getElements({id: id}, function(err, data) {
+            dispatch(receivedElements(data, dataSourcesObject));
+        })
     }
 }

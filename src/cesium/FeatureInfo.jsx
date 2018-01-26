@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Draggable from 'react-draggable';
 
-import {toggleFeatureInfo} from '../actions/index'
+import {toggleFeatureInfo, elementsData} from '../actions/index'
 
 class FeatureInfo extends Component {
 
@@ -36,6 +36,9 @@ class FeatureInfo extends Component {
                                 </thead>
                                 <tbody>{rows}</tbody>
                             </table>
+                            <div className="elements-btn-container">
+                              <button className="show-elements" onClick={() => this.props.elementsData(this.props.selectedFeature.properties.id, this.props.dataSources)}>Show elements</button>
+                            </div>
 
                           </div>
 
@@ -58,13 +61,15 @@ function mapStateToProps(state) {
     return {
         layers: state.layers,
         featureInfo: state.featureInfo,
-        selectedFeature: state.selectedFeature
+        selectedFeature: state.selectedFeature,
+        dataSources: state.tracks.dataSources
     }
 }
 
 function matchDispatchToProps(dispatch){
     return bindActionCreators({
-        toggleFeatureInfo: toggleFeatureInfo
+        toggleFeatureInfo: toggleFeatureInfo,
+        elementsData: elementsData
     }, dispatch)
 }
 

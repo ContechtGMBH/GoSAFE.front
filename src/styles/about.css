@@ -6,7 +6,7 @@
   border-radius: 17px;
   color: #fff;
   width: 400px;
-  height: 400px;
+  height: 600px;
   z-index: 10;
   position: fixed;
   top: 30%;
@@ -33,7 +33,7 @@
     transform: -webkit-translate(-50%, -50%);
     transform: -moz-translate(-50%, -50%);
     transform: -ms-translate(-50%, -50%);
-    width: 20%;
+    width: 100px;
     height: 35px;
     text-align: center;
     vertical-align: middle;
