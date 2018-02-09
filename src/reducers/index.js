@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 
+import ViewerReducers from './reducer-viewer';
 import LayersReducers from './reducer-layers';
 import PanelReducers from './reducer-panel';
 import AboutReducers from './reducer-about';
@@ -13,6 +14,7 @@ import RailmlReducers from './reducer-railml';
 import TrackReducers from './reducer-tracks';
 
 export const allReducers = combineReducers({
+  viewer: ViewerReducers,
   layers: LayersReducers,
   events: EventsReducers,
   panel: PanelReducers,

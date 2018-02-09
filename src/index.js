@@ -10,7 +10,7 @@ import './styles/loader.css';
 import './styles/panel.css';
 import './styles/about.css';
 import './styles/homepage.css';
-import './styles/layers.css';
+import './styles/tracks.css';
 import './styles/feature-info.css';
 import './styles/statistics.css';
 import './styles/railml.css';

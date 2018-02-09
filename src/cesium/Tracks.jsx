@@ -3,13 +3,11 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Draggable from 'react-draggable';
 
-//import { Neo4jGraphRenderer } from 'neo4j-graph-renderer';
-//import {Sigma, NeoCypher, RandomizeNodePositions, RelativeSize, ForceAtlas2, EdgeShapes} from 'react-sigma';
 import { Graph } from 'react-d3-graph';
 
 import {toggleLayers} from '../actions/index';
 import {getGraph, getAdjacentNodes} from '../utils/dataUtils';
-
+import {colorSelectedFeature} from '../utils/eventsUtils';
 
 const myConfig = {
     nodeHighlightBehavior: true,
@@ -19,11 +17,13 @@ const myConfig = {
     node: {
         color: 'lightgreen',
         size: 1200,
-        highlightStrokeColor: '#808080',
+        strokeColor: '#000000',
+        highlightStrokeColor: '#000000',
         fontSize: 10,
         highlightFontSize: 12,
         labelProperty: 'label',
-        highlightStrokeWidth: 3
+        strokeWidth: 1,
+        highlightStrokeWidth: 4
     },
     link: {
         highlightColor: 'red',
@@ -33,7 +33,7 @@ const myConfig = {
     width: 655
 }
 
-class Layers extends Component {
+class Tracks extends Component {
 
     constructor(props){
       super(props);
@@ -100,6 +100,16 @@ class Layers extends Component {
       })
     }
 
+    zoomToNode = () => {
+      let selectedNode = this.state.selectedNode;
+      let entity = this.props.dataSources.getById(selectedNode.id)
+      if (entity){
+        colorSelectedFeature(entity)
+        this.props.viewer.zoomTo(entity)
+      }
+
+    }
+
     render() {
         if (this.props.layers.display) {
           return (
@@ -131,7 +141,7 @@ class Layers extends Component {
                                       {
                                         Object.keys(this.state.selectedNode.properties).map((k,index) => {
                                           if (k === 'geometry'){
-                                            return <li className="node-property-item" key={index}><b>{k}:</b> {this.state.selectedNode.properties[k].substring(0,25)}...</li>
+                                            return <li className="node-property-item" key={index} title={this.state.selectedNode.properties[k]}><b>{k}:</b> {this.state.selectedNode.properties[k].substring(0,25)}...</li>
                                           }
                                           return <li className="node-property-item" key={index}><b>{k}:</b> {this.state.selectedNode.properties[k]}</li>
                                         })
@@ -149,9 +159,9 @@ class Layers extends Component {
                                       <div className="node-details-header">Actions</div>
                                       <button onClick={()=>this.expandNode(this.state.selectedNode.id, this.state.selectedNode.label)}>Expand</button>
                                       <button onClick={()=>this.removeNode(this.state.selectedNode.id)}>Remove</button>
+                                      { (this.state.selectedNode.label === 'Track') ? <button onClick={()=>this.zoomToNode()}>Zoom</button> : null }
                                     </div>
                                   </div> : null}
-
                                 </div>
                           </div>
                       </div>
@@ -173,8 +183,9 @@ class Layers extends Component {
 function mapStateToProps(state) {
     return {
       layers: state.layers,
-      dataSources: state.dataSources.dataSources,
-      tracks: state.tracks.tracks
+      dataSources: state.tracks.dataSources,
+      tracks: state.tracks.tracks,
+      viewer: state.viewer.viewer
     }
 }
 
@@ -184,4 +195,4 @@ function matchDispatchToProps(dispatch){
 
 
 
-export default connect(mapStateToProps, matchDispatchToProps)(Layers);
+export default connect(mapStateToProps, matchDispatchToProps)(Tracks);

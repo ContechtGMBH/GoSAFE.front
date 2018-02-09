@@ -17,6 +17,9 @@ export default function(state = initial, action) {
           container = dataSourcesObject.container;
           data = dataSourcesObject.entities.data;
           for (let entity of data){
+            if (container.getById(entity.e.properties.id)){
+              continue;
+            }
             let coordinatesArray = []
             let properties = Object.assign({}, entity.e.properties);
             let label = entity.e.labels[0]
@@ -31,7 +34,17 @@ export default function(state = initial, action) {
                 id: properties.id,
                 position : Cesium.Cartesian3.fromDegrees(coordinatesArray[0], coordinatesArray[1]),
                 point: Styles[label],
-                properties: properties
+                properties: properties,
+                label: {
+                  text: properties.name || properties.id,
+                  font : '12pt monospace',
+                  style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                  outlineWidth : 2,
+                  verticalOrigin : Cesium.VerticalOrigin.BOTTOM,
+                  pixelOffset : new Cesium.Cartesian2(0, -9),
+                  fillColor: Cesium.Color.RED,
+                  distanceDisplayCondition: {near: 0.0, far: 2000}
+                }
 
               })
             }

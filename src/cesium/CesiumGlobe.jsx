@@ -8,17 +8,16 @@ import Cesium from "cesium/Source/Cesium";
 import TopBar from "./TopBar"
 import Panel from "./Panel";
 import About from "./About";
-import Layers from "./Layers";
+import Tracks from "./Tracks";
 import FeatureInfo from './FeatureInfo';
 import Statistics from './Statistics';
 import Railml from './Railml';
 
-import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature, tracksData} from '../actions/index'
+import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature, tracksData, shareViewer} from '../actions/index'
 
 const eventsUtils = require('../utils/eventsUtils');
 //import Registry from '../utils/registry'
 
-import CesiumBillboard from "./CesiumBillboard";
 import CesiumDatasources from "./CesiumDatasources";
 
 class CesiumGlobe extends Component {
@@ -66,6 +65,27 @@ class CesiumGlobe extends Component {
 
         const scene = this.viewer.scene;
 
+        // DELFT 3D
+        var tilesetBuildings = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+          url: 'http://localhost:3001/delft3d/Building'
+        }))
+        var tilesetWater = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+          url: 'http://localhost:3001/delft3d/WaterBody'
+        }))
+        var tilesetPlants = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+          url: 'http://localhost:3001/delft3d/PlantCover'
+        }))
+        tilesetBuildings.style = new Cesium.Cesium3DTileStyle({
+          color: 'color("red")'
+        })
+        tilesetWater.style = new Cesium.Cesium3DTileStyle({
+          color: 'color("blue")'
+        })
+        tilesetPlants.style = new Cesium.Cesium3DTileStyle({
+          color: 'color("chartreuse")'
+        })
+
+        
         // LMB click events, by default feature info
         this.viewer.screenSpaceEventHandler.setInputAction(function(movement) {
 
@@ -85,12 +105,14 @@ class CesiumGlobe extends Component {
 
         // camera
         this.viewer.camera.flyTo({
-            destination: Cesium.Cartesian3.fromDegrees(-8.484, 54.272, 1500.0)
+            destination: Cesium.Cartesian3.fromDegrees(-8.5, 53.0, 450000.0)
         })
         // Force immediate re-render now that the Cesium viewer is created
         this.setState({viewerLoaded: true}); // eslint-disable-line react/no-did-mount-set-state
 
         this.viewer.scene.debugShowFramesPerSecond = true;
+
+        props.shareViewer(this.viewer)
     }
 
     componentWillUnmount() {
@@ -135,9 +157,6 @@ class CesiumGlobe extends Component {
         const contents = this.renderContents()
         //console.log(this.props)
 
-        const billboard = (this.viewer)
-            ? <CesiumBillboard scene={this.viewer.scene}/>
-            : null;
         const dataSources = (this.viewer)
             ? <CesiumDatasources dataSources={this.props.dataSources.dataSources}/>
             : null;
@@ -146,7 +165,7 @@ class CesiumGlobe extends Component {
             <div>
                 <TopBar/>
                 <Panel/>
-                <Layers/>
+                <Tracks/>
                 <About/>
                 <FeatureInfo/>
                 <Statistics/>
@@ -154,7 +173,6 @@ class CesiumGlobe extends Component {
                 <div className="cesiumGlobeWrapper" style={containerStyle}>
                     <div className="cesiumWidget" ref={element => this.cesiumContainer = element} style={widgetStyle}>
                         {contents}
-                        {billboard}
                         {dataSources}
                     </div>
                 </div>
@@ -177,7 +195,8 @@ function matchDispatchToProps(dispatch) {
         getExtendedData: getExtendedData,
         toggleFeatureInfo: toggleFeatureInfo,
         selectFeature: selectFeature,
-        tracksData: tracksData
+        tracksData: tracksData,
+        shareViewer: shareViewer
     }, dispatch)
 }
 
