@@ -67,5 +67,24 @@ module.exports = {
           .catch(function(error){
               console.log(error)
           })
+    },
+
+    getNeighbours: function(bbox) {
+      let p1 = {x: 53, y: 0};
+      let p2 = {x: 53.25, y: 2.75};
+      //let center = {x: (p2.x + p1.x)/2 , y: (p2.y + p1.y)/2}
+      let radius =  this.distance(p1.y, p1.x, p2.y, p2.x)/2
+      //console.log(center)
+      console.log(radius)
+    },
+
+    distance: function(lat1, lon1, lat2, lon2) {
+      var p = 0.017453292519943295;    // Math.PI / 180
+      var c = Math.cos;
+      var a = 0.5 - c((lat2 - lat1) * p)/2 +
+              c(lat1 * p) * c(lat2 * p) *
+              (1 - c((lon2 - lon1) * p))/2;
+
+      return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
     }
 }

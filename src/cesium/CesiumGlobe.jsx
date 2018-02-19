@@ -16,7 +16,6 @@ import Railml from './Railml';
 import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature, tracksData, shareViewer} from '../actions/index'
 
 const eventsUtils = require('../utils/eventsUtils');
-//import Registry from '../utils/registry'
 
 import CesiumDatasources from "./CesiumDatasources";
 
@@ -66,6 +65,9 @@ class CesiumGlobe extends Component {
         const scene = this.viewer.scene;
 
         // DELFT 3D
+        this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+          url: 'http://localhost:3001/test'
+        }))
         var tilesetBuildings = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
           url: 'http://localhost:3001/delft3d/Building'
         }))
@@ -85,7 +87,7 @@ class CesiumGlobe extends Component {
           color: 'color("chartreuse")'
         })
 
-        
+
         // LMB click events, by default feature info
         this.viewer.screenSpaceEventHandler.setInputAction(function(movement) {
 

@@ -56,7 +56,7 @@ module.exports = {
             highlited.colorTile = feature.color;
             feature.color = Cesium.Color.CYAN;
 
-            console.log(feature.getPropertyNames())
+            //console.log(feature.getPropertyNames())
 
         }
 
