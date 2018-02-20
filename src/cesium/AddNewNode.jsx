@@ -28,6 +28,8 @@ class AddNewNode extends Component {
       /*
        *  New node properties input handler
        *  (1) input must be a valid JSON object
+       *
+       *  @param {event} e - an onChange event
        */
       try {
         JSON.parse(e.target.value) // (1)
@@ -42,6 +44,8 @@ class AddNewNode extends Component {
       /*
        *  New node relationship with the parent nodes
        *  (1) new node label depends on this relationship
+       *
+       *  @param {event} e - an onChange event
        */
       let firstLabel = CONSTRAINTS.labels[e.target.value][0] // (1)
       this.setState({
@@ -53,6 +57,8 @@ class AddNewNode extends Component {
     handleLabelChange = (e) => {
       /*
        *  New node label handler
+       *
+       *  @param {event} e - an onChange event
        */
       this.setState({newNodeLabel: e.target.value})
     }
@@ -63,6 +69,8 @@ class AddNewNode extends Component {
        *  (1) must be a valid WKT stringify
        *  !!! this motherfucker has an ugly console.log if can't parse a string,
        *      must be removed from the module, otherwise we've got a log onChange !!!
+       *
+       *  @param {event} e - an onChange event
        */
       try {
         wkt.read(e.target.value)

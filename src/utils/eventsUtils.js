@@ -10,8 +10,18 @@ var highlited = {
 module.exports = {
 
     toggleFeatureInfo: function(props, scene, movement){
-
-        if (Cesium.defined(highlited.feature)){
+        /*
+         * LMB event utility. Selects a feature from the globe and extracts properties.
+         * Selected item has a different color.
+         *
+         * (1) if a different object was selected before, change its color to the basic color
+         * (2) if this previously selected object is a tile, its structure is a little bit different
+         *
+         * @param {object} props - CesiumGlobe component properties (actions)
+         * @param {object} scene - an active Cesium scene object
+         * @param {object} movement - an object that contains coordinates of the last LMB click
+         */
+        if (Cesium.defined(highlited.feature)){ // (1)
           if (highlited.feature.id.polyline){
             highlited.feature.id.polyline.material.color = highlited.color;
           } else if (highlited.feature.id.polygon) {
@@ -22,7 +32,7 @@ module.exports = {
           highlited.feature = undefined;
         }
 
-        if (Cesium.defined(highlited.tile)){
+        if (Cesium.defined(highlited.tile)){ // (2)
           highlited.tile.color = highlited.colorTile;
           highlited.tile = undefined;
         }
@@ -51,7 +61,7 @@ module.exports = {
               feature.id.point.color = Cesium.Color.CYAN
             }
 
-        } else if (Cesium.defined(feature) && (feature instanceof Cesium.Cesium3DTileFeature)) {
+        } else if (Cesium.defined(feature) && (feature instanceof Cesium.Cesium3DTileFeature)) { // (2)
             highlited.tile = feature;
             highlited.colorTile = feature.color;
             feature.color = Cesium.Color.CYAN;
@@ -63,6 +73,9 @@ module.exports = {
     },
 
     closeFeatureInfoBox: function(){
+      /*
+       * Closes a feature info box and change its color to the basic color
+       */
       if (Cesium.defined(highlited.feature)){
         if (highlited.feature.id.polyline){
           highlited.feature.id.polyline.material.color = highlited.color;
@@ -76,6 +89,9 @@ module.exports = {
     },
 
     addNewFeature: function(){
+        /*
+         * Deprecated
+         */
         console.log('new feature')
     },
 

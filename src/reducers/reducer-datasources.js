@@ -12,7 +12,7 @@ export default function(state = initial, action) {
     let container = null;
     let data = null;
     switch (action.type) {
-
+        // TRACK ELEMENTS
         case 'RECEIVED_ELEMENTS':
           container = dataSourcesObject.container;
           data = dataSourcesObject.entities.data;
@@ -56,6 +56,48 @@ export default function(state = initial, action) {
           }
 
         case 'REQUEST_ELEMENTS':
+            return state;
+
+        // CURRENTLY ONLY BUILDINGS
+        case 'RECEIVED_NEIGHBOURHOOD':
+          container = dataSourcesObject.container;
+          data = dataSourcesObject.entities.data;
+          for (let entity of data){
+            if (container.getById(entity.node.properties.ID)){
+              continue;
+            }
+            let coordinatesArray = []
+            let properties = Object.assign({}, entity.node.properties);
+            //let label = entity.node.labels[0]
+            if (properties.geometry){
+              let wkt = new Wkt.Wkt();
+              wkt.read(properties.geometry)
+
+              wkt.components[0][0].forEach((item)=> {
+                coordinatesArray.push(item.x, item.y)
+              })
+              delete properties.geometry;
+              container.add({
+                id: properties.ID,
+                polygon : {
+                  hierarchy: Cesium.Cartesian3.fromDegreesArray(coordinatesArray),
+                  material: Cesium.Color.RED.withAlpha(0.8),
+                  outline : true,
+                  outlineColor : Cesium.Color.RED,
+                  extrudedHeight: 10
+                },
+                properties: properties,
+
+              })
+            }
+          }
+
+          return {
+              dataSources: dataSourcesObject.container,
+              loading: false
+          }
+
+        case 'REQUEST_NEIGHBOURHOOD':
             return state;
 
         default:

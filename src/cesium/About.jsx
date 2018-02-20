@@ -27,7 +27,12 @@ class About extends Component {
 
                           <div className="footer">
                               <div className="btn-container">
-                                  <div className="close" onClick={() => this.props.toggleAbout(this.props.about.display)}>Close</div>
+                                  <div
+                                    className="close"
+                                    onClick={() => this.props.toggleAbout(this.props.about.display)}
+                                    >
+                                    Close
+                                  </div>
                               </div>
                           </div>
                       </div>

@@ -28,7 +28,7 @@ export default function(state = initial, action) {
               wkt.components.forEach((item)=> {
                 coordinatesArray.push(item.x, item.y)
               })
-              delete properties.geometry;
+              //delete properties.geometry;
               container.add({
                 id: properties.id,
                 polyline: {

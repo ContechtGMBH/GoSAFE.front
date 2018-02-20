@@ -10,35 +10,52 @@ class Panel extends Component {
         if (this.props.panel.display) {
             return (
                 <div className="panel-main">
-                    <div className="panel-module" onClick={() =>{
+                    <div
+                      className="panel-module"
+                      onClick={() =>{
                             this.props.toggleLayers(this.props.layers.display);
                             this.props.togglePanel(this.props.panel.display);
                         }}>
                         Tracks
                     </div>
-                    <div className="panel-module disabled" onClick={() => this.props.togglePanel(this.props.panel.display)}>
+                    <div
+                      className="panel-module disabled"
+                      onClick={() => this.props.togglePanel(this.props.panel.display)}
+                      >
                         Analysis
                     </div>
-                    <div className="panel-module" onClick={() => {
+                    <div
+                      className="panel-module"
+                      onClick={() => {
                       this.props.togglePanel(this.props.panel.display);
                       this.props.toggleStatistics(this.props.statistics.display);
                     }}>
                         Statistics
                     </div>
-                    <div className="panel-module disabled" onClick={() => this.props.togglePanel(this.props.panel.display)}>
+                    <div
+                      className="panel-module disabled"
+                      onClick={() => this.props.togglePanel(this.props.panel.display)}
+                      >
                         Imagery
                     </div>
-                    <div className="panel-module disabled" onClick={() => this.props.togglePanel(this.props.panel.display)}>
+                    <div
+                      className="panel-module disabled"
+                      onClick={() => this.props.togglePanel(this.props.panel.display)}
+                      >
                         Search
                     </div>
-                    <div className="panel-module" onClick={() => {
+                    <div
+                      className="panel-module"
+                      onClick={() => {
                       this.props.togglePanel(this.props.panel.display)
                       this.props.toggleRailml(this.props.railml.display)
                     }}>
                         RailML
                     </div>
                     <hr/>
-                    <div className="panel-module about" onClick={() => {
+                    <div
+                      className="panel-module about"
+                      onClick={() => {
                       this.props.togglePanel(this.props.panel.display);
                       this.props.toggleAbout(this.props.about.display);
                     }}>

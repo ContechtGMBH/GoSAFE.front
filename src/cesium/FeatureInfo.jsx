@@ -3,15 +3,20 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Draggable from 'react-draggable';
 
-import {toggleFeatureInfo, elementsData} from '../actions/index'
+import {toggleFeatureInfo, elementsData, neighbourhoodData} from '../actions/index'
 
 class FeatureInfo extends Component {
 
     generateRows() {
+        /*
+         * Generates <table> rows from properties object
+         */
         var data = this.props.selectedFeature.properties;
         var rows = [];
         Object.entries(data).forEach(
-            ([key, value]) => rows.push(<tr key={key}><td>{key}</td><td>{value}</td></tr>)
+            ([key, value]) => {
+              if ((key !== "geometry") && (key !== "bbox")){rows.push(<tr key={key}><td>{key}</td><td>{value}</td></tr>)}
+            }
         );
         return rows
 
@@ -38,6 +43,8 @@ class FeatureInfo extends Component {
                             </table>
                             <div className="elements-btn-container">
                               <button className="show-elements" onClick={() => this.props.elementsData(this.props.selectedFeature.properties.id, this.props.dataSources)}>Show elements</button>
+
+                              <button className="show-elements" onClick={() => this.props.neighbourhoodData(this.props.selectedFeature.properties.geometry, this.props.dataSources)}>Show neighbourhood</button>
                             </div>
 
                           </div>
@@ -69,7 +76,8 @@ function mapStateToProps(state) {
 function matchDispatchToProps(dispatch){
     return bindActionCreators({
         toggleFeatureInfo: toggleFeatureInfo,
-        elementsData: elementsData
+        elementsData: elementsData,
+        neighbourhoodData: neighbourhoodData
     }, dispatch)
 }
 

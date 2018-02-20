@@ -66,6 +66,8 @@ class Tracks extends Component {
     handleTrackSearch = (e) => {
       /*
        *  Search input handler, if empty display from props, else from state
+       *
+       *  @param {event} e - onChange event
        */
       let phrase = e.target.value;
       let filteredTracks = this.props.tracks.filter((item) => (item) ? (item.includes(phrase)) : false)
@@ -75,6 +77,8 @@ class Tracks extends Component {
     selectTrack = (id) =>{
       /*
        *  Select a track from the list
+       *
+       *  @param {string} id - a track node id
        */
       getGraph({id: id}, (err,data)=>{
         this.setState({graph: {nodes: [], links: []}, selectedTrackId: id, selectedNode: null, deletedRelationships: []})
@@ -85,6 +89,8 @@ class Tracks extends Component {
     onClickNode = (node) => {
       /*
        *  When a node is clicked on the canvas it is set as selected
+       *
+       *  @param {string} node - a curently selected node id
        */
       let selectedNode = this.state.graph.nodes.filter((n) => n.id === node)
       let trackRelationships = this.state.graph.links.filter((item) => { return (
@@ -108,6 +114,9 @@ class Tracks extends Component {
        * (1) nodes and relationships are added to the Graph
        * (2) if there are old nodes related to any new node, relations between them are recreated from 'deletedRelationships'
        * (3) duplicates are removed
+       *
+       * @param {string} id - curent node id
+       * @param {string} label - current node label
        */
       getAdjacentNodes({id: id, label: label}, (err,data) => {
         let nodes = this.state.graph.nodes.concat(data.data.nodes)
@@ -141,6 +150,8 @@ class Tracks extends Component {
       /*
        *  When remove button is clicked node and it's relationships are deleted
        *  (1) deleted relationships are saved and if deleted node is back, they'll be restored
+       *
+       *  @param {string} node - a curently selected node id
        */
       let filteredNodes = this.state.graph.nodes.filter((n) => n.id !== node)
       let filteredRelationships = this.state.graph.links.filter((item) => ((item.source !== node) && (item.target !== node) ))
@@ -178,6 +189,8 @@ class Tracks extends Component {
        *  otherwise it creates a new node and relationship and adds it to the graph
        *  use {() => this.toggleAddNode()} to switch only
        *  use {() => his.toggleAddNode(obj)} to switch and create a new node
+       *
+       *  @param {object} created - a node object
        */
       let currentState = this.state.addNodeView;
       this.setState({

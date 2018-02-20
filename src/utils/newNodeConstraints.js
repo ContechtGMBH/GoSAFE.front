@@ -1,3 +1,13 @@
+/*
+ * Each time a new node is created, there are some constraints.
+ * If the parent node has a railml label, it can have only valid railml relationships (or any other not railml rel.)
+ * If the railml relationship between nodes is selected, child node can have only railml label.
+ *
+ * Examples:
+ * railml labels - Track, Buffer Stop, Level Crossing, Balise etc.
+ * railml relationships - BEGINS, HAS_SWITCH, HAS_CONNECTION etc.
+ */
+
 module.exports = {
   "relationships": {
     "Track": ["BEGINS", "ENDS", "HAS_SWITCH", "HAS_CROSSING", "HAS_TRACK_ELEMENT", "HAS_OCS_ELEMENT"],
