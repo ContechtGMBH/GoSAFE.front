@@ -1,8 +1,6 @@
 import axios from "axios";
-import {endpoint} from '../../config/endpoints'
 
-const __API_URL__ = endpoint + 'api/v1/';
-const __RAILML_URL__ = endpoint;
+declare var __API_URL__: String;
 
 module.exports = {
 
@@ -10,7 +8,7 @@ module.exports = {
       /*
        * Deprecated
        */
-        axios.get(__API_URL__ + endpoint)
+        axios.get(__API_URL__ + 'api/v1/' + endpoint)
             .then(function(response){
                 callback(null, {data: response.data, style: style, name: endpoint})
             })
@@ -25,7 +23,7 @@ module.exports = {
        * To fix.
        */
 
-      axios.post(__RAILML_URL__ + endpoint, data)
+      axios.post('__RAILML_URL__' + endpoint, data)
           .then(function(response){
             callback(null, {data: response.data, style: style, name: endpoint})
           })
@@ -42,7 +40,7 @@ module.exports = {
          * @param {string} endpoint - this param should be removed, there is only one endpoint for tracks
          * @callback callback - a callback to run after GET request is resolved. Handles error and response.
          */
-        axios.get(__API_URL__ + endpoint)
+        axios.get(__API_URL__ + 'api/v1/' + endpoint)
             .then(function(response){
                 callback(null, {data: response.data, name: endpoint})
             })
@@ -59,7 +57,7 @@ module.exports = {
          * @param {object} data - an object with the 'track_id' parameter
          * @callback callback - a callback to run after GET request is resolved. Handles error and response.
          */
-        axios.post(__API_URL__ + 'elements', data)
+        axios.post(__API_URL__ + 'api/v1/elements', data)
             .then(function(response){
                 callback(null, {data: response.data})
             })
@@ -76,7 +74,7 @@ module.exports = {
        * @param {string} data - an object with the 'id' parameter
        * @callback callback - a callback to run after GET request is resolved. Handles error and response.
        */
-      axios.post(__API_URL__ + 'tracktograph', data)
+      axios.post(__API_URL__ + 'api/v1/tracktograph', data)
           .then(function(response){
               callback(null, {data: response.data})
           })
@@ -93,7 +91,7 @@ module.exports = {
        * @param {string} data - an object with the 'id' parameter
        * @callback callback - a callback to run after GET request is resolved. Handles error and response.
        */
-      axios.post(__API_URL__ + 'elementstograph', data)
+      axios.post(__API_URL__ + 'api/v1/elementstograph', data)
           .then(function(response){
               callback(null, {data: response.data})
           })

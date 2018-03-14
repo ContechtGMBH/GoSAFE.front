@@ -2,9 +2,8 @@ import React, {Component} from "react";
 import axios from "axios";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import logo from '../assets/logo.png'
-import {endpoint} from '../../config/endpoints'
 
-const __API_URL__ = endpoint
+declare var __API_URL__ : String;
 
 export default class Homepage extends Component {
 

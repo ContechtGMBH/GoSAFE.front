@@ -1,10 +1,8 @@
 import turf from "turf";
 import Wkt from 'wicket/wicket';
 import axios from "axios";
-import {endpoint} from '../../config/endpoints'
 
-const __API_URL__ = endpoint + 'api/v1/';
-const __RAILML_URL__ = endpoint;
+declare var __API_URL__ : String;
 
 module.exports = {
 
@@ -26,7 +24,7 @@ module.exports = {
 
         let bufferWkt = wkt.read(JSON.stringify(buffer)).write()
 
-        axios.post(__API_URL__ + 'neighbourhood', {wkt: bufferWkt})
+        axios.post(__API_URL__ + 'api/v1/neighbourhood', {wkt: bufferWkt})
             .then(function(response){
                 callback(null, {data: response.data})
             })
