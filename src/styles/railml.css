@@ -1,3 +1,43 @@
+.panel-railml {
+  position: absolute;
+  top: 35px;
+  background: rgba(42, 42, 42, 0.95);
+
+  border-radius: 17px;
+  color: #fff;
+  width: 400px;
+  height: 250px;
+  z-index: 10;
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  /*
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
+  */
+}
+
+.railml-header {
+    margin: 0 auto;
+    height: 35px;
+}
+
+.railml-title {
+    margin:  0 auto;
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+.railml-panel-content {
+    margin: 0 auto;
+    height: 150px;
+}
+
 .railml-container {
   padding: 10%;
 
@@ -5,4 +45,37 @@
 
 .upload-btn {
 
+}
+
+
+.railml-footer {
+    margin: 0 auto;
+    height: 50px;
+}
+
+.railml-btn-container{
+    position:relative;
+    width: 100%;
+    height: 100%;
+}
+
+.railml-close {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+
+.railml-close:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
 }

@@ -30,7 +30,7 @@ class CesiumGlobe extends Component {
 
     componentWillMount() {
         if (localStorage.user === 'authorized'){
-            console.log('Welcome to GoSafe Visualization Platform')
+            console.log('Welcome to the GoSafe Visualization Platform')
         } else {
             this.props.history.push('/');
         }
@@ -65,6 +65,7 @@ class CesiumGlobe extends Component {
         const scene = this.viewer.scene;
 
         // DELFT 3D
+        /*
         this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
           url: 'http://localhost:3001/test'
         }))
@@ -87,6 +88,9 @@ class CesiumGlobe extends Component {
           color: 'color("chartreuse")'
         })
 
+        var s = [{id: 1, value: 3},{id: 2, value: 5},{id: 3, value: 3},{id: 4, value: 7},{id: 5, value: 11},{id: 6, value: 9},{id: 7, value: 2},{id: 8, value: 6},{id: 9, value: 7},{id: 10, value: 13},]
+
+        statisticsUtils.calculateBreaks(s, 5)*/
 
         // LMB click events, by default feature info
         this.viewer.screenSpaceEventHandler.setInputAction(function(movement) {

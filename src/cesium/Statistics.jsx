@@ -14,11 +14,11 @@ class Statistics extends Component {
               return (
                   <Draggable cancel=".panel-content">
                       <div className="panel-statistics">
-                          <div className="header">
-                              <div className="title">Statistics</div>
+                          <div className="statistics-header">
+                              <div className="statistics-title">Statistics</div>
                           </div>
-                          <div className="panel-content">
-                            <div className="chart-controls">
+                          <div className="statistics-panel-content">
+                            <div className="statistics-chart-controls">
                               <div>An example d3 barchart...</div>
                               <br/>
                               <select className="combobox" onChange={event => this.props.loadDataset(event.target.value)}>
@@ -27,14 +27,14 @@ class Statistics extends Component {
                                 <option value="DATASET3">Dataset 3</option>
                               </select>
                             </div>
-                            <div className="chart">
+                            <div className="statistics-chart">
                               <BarChart data={this.props.datasets.dataset} size={[300, 300]}/>
                             </div>
                           </div>
 
-                          <div className="footer">
-                              <div className="btn-container">
-                                  <div className="close" onClick={() => this.props.toggleStatistics(this.props.statistics.display)}>Close</div>
+                          <div className="statistics-footer">
+                              <div className="statistics-btn-container">
+                                  <div className="statistics-close" onClick={() => this.props.toggleStatistics(this.props.statistics.display)}>Close</div>
                               </div>
                           </div>
                       </div>

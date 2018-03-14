@@ -12,10 +12,10 @@ class About extends Component {
               return (
                   <Draggable cancel=".panel-content">
                       <div className="panel-about">
-                          <div className="header">
-                              <div className="title">About</div>
+                          <div className="about-header">
+                              <div className="about-title">About</div>
                           </div>
-                          <div className="panel-content">
+                          <div className="about-panel-content">
                               <span className="about-info">Authors: Damian Michal Harasymczuk</span>
                               <br/>
                               <span className="about-info">Company: Contecht GMBH</span>
@@ -25,10 +25,10 @@ class About extends Component {
                               <span className="about-info">License: MIT</span>
                           </div>
 
-                          <div className="footer">
-                              <div className="btn-container">
+                          <div className="about-footer">
+                              <div className="about-btn-container">
                                   <div
-                                    className="close"
+                                    className="about-close"
                                     onClick={() => this.props.toggleAbout(this.props.about.display)}
                                     >
                                     Close

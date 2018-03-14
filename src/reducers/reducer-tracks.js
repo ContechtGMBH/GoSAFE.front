@@ -31,6 +31,7 @@ export default function(state = initial, action) {
               //delete properties.geometry;
               container.add({
                 id: properties.id,
+                name: 'Track',
                 polyline: {
                   positions: Cesium.Cartesian3.fromDegreesArray(coordinatesArray),
                   width : 8,

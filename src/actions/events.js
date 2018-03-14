@@ -1,7 +1,7 @@
 export const selectFeature = (feature) => {
     /*
      *  Selects a new feature on the globe and stores its properties
-     * 
+     *
      *  @param {object} feature - a selected feature object
      */
     let properties = {};
@@ -9,8 +9,9 @@ export const selectFeature = (feature) => {
     propertiesNames.forEach(function(p){
         properties[p] = feature.id.properties[p]._value
     })
+    let name = feature.id.name;
     return {
         type: 'SELECT_FEATURE',
-        payload: properties
+        payload: {properties: properties, name: name}
     }
 }

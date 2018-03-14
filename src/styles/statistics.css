@@ -6,7 +6,7 @@
   border-radius: 17px;
   color: #fff;
   width: 900px;
-  height: 600px;
+  height: 550px;
   z-index: 10;
   position: fixed;
   top: 30%;
@@ -19,7 +19,26 @@
   */
 }
 
-.chart-controls {
+.statistics-header {
+    margin: 0 auto;
+    height: 35px;
+}
+
+.statistics-title {
+    margin:  0 auto;
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+.statistics-panel-content {
+    margin: 0 auto;
+    height: 450px;
+}
+
+.statistics-chart-controls {
   display: inline-block;
   vertical-align:top;
   padding: 5%;
@@ -35,7 +54,7 @@
   height: 35px;
 }
 
-.chart {
+.statistics-chart {
   display: inline-block;
   padding: 5%;
   width: 40%;
@@ -54,4 +73,36 @@
 
 .axisWhite text{
   fill: White;
+}
+
+.statistics-footer {
+    margin: 0 auto;
+    height: 50px;
+}
+
+.statistics-btn-container{
+    position:relative;
+    width: 100%;
+    height: 100%;
+}
+
+.statistics-close {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+
+.statistics-close:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
 }

@@ -9,8 +9,12 @@ class App extends Component {
         return (
             <Router>
                 <div>
-                    <Route exact path="/" component={Homepage} />
-                    <Route path="/platform" component={CesiumGlobe} />
+                    <Route exact
+                      path="/"
+                      component={Homepage} />
+                    <Route
+                      path="/platform"
+                      component={CesiumGlobe} />
                 </div>
             </Router>
         );

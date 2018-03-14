@@ -49,11 +49,11 @@ class Railml extends Component {
             if (this.props.railml.display) {
               return (
                   <Draggable cancel=".panel-content">
-                      <div className="panel-about">
-                          <div className="header">
-                              <div className="title">Railml</div>
+                      <div className="panel-railml">
+                          <div className="railml-header">
+                              <div className="railml-title">Railml</div>
                           </div>
-                          <div className="panel-content">
+                          <div className="railml-panel-content">
                                 <div className="railml-container">
                                   Input CRS:
                                   <select className="select-btn" onChange={this.chooseCrs} value={this.state.crs}>
@@ -72,9 +72,9 @@ class Railml extends Component {
 
                           </div>
 
-                          <div className="footer">
-                              <div className="btn-container">
-                                  <div className="close" onClick={() => this.props.toggleRailml(this.props.railml.display)}>Close</div>
+                          <div className="railml-footer">
+                              <div className="railml-btn-container">
+                                  <div className="railml-close" onClick={() => this.props.toggleRailml(this.props.railml.display)}>Close</div>
                               </div>
                           </div>
                       </div>

@@ -1,7 +1,14 @@
 const initial = {
     dataset: [5,10,1,3,7,6,5,7,8,1,2,4]
 };
-
+/*
+ * Mocked datasets
+ *
+ * type: 'DATASET{index}'
+ * payload: {null}
+ *
+ * default: {array of int}
+ */
 export default function (state = initial, action){
   switch (action.type){
     case 'DATASET1':

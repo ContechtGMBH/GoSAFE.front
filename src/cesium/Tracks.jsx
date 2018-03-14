@@ -12,7 +12,6 @@ import {getGraph, getAdjacentNodes} from '../utils/dataUtils';
 import {colorSelectedFeature} from '../utils/eventsUtils';
 
 
-
 const myConfig = {
     nodeHighlightBehavior: true,
     linkHighlightBehavior: true,
@@ -59,8 +58,8 @@ class Tracks extends Component {
       this.setState({layerIndex: i})
     }
 
-    changeColors = (c) => {
-      this.setState({colors: c})
+    changeColors = () => {
+      //statisticsUtils.graduatedColors(this.props.viewer.entities, "Track", "test", 5)
     }
 
     handleTrackSearch = (e) => {
@@ -217,12 +216,12 @@ class Tracks extends Component {
         if (this.props.layers.display) {
           return (
               <Draggable cancel=".layers-row">
-                  <div className="panel-layers">
-                      <div className="header">
-                          <div className="title">Tracks</div>
+                  <div className="panel-tracks">
+                      <div className="tracks-header">
+                          <div className="tracks-title">Tracks</div>
                       </div>
-                      <div className="panel-content">
-                          <div className="layers-row">
+                      <div className="tracks-panel-content">
+                          <div className="tracks-row">
                                 <div className="tracks-selection">
                                   <div className="tracks-search">
                                     <input
@@ -234,7 +233,7 @@ class Tracks extends Component {
                                       >
                                     </input>
                                   </div>
-                                  <div className="layers-list">
+                                  <div className="tracks-list">
                                     <ul>
                                       {
                                         (this.state.trackSearchPhrase) ?
@@ -274,8 +273,8 @@ class Tracks extends Component {
                                     </ul>
                                    </div>
                                 </div>
-                                <div className="layers-overview">
-                                    <div className="graph">
+                                <div className="tracks-overview">
+                                    <div className="tracks-graph">
                                       {
                                         (this.state.graph.nodes.length) ?
                                         <Graph
@@ -365,10 +364,10 @@ class Tracks extends Component {
                           </div>
                       </div>
 
-                      <div className="footer">
-                          <div className="btn-container">
+                      <div className="tracks-footer">
+                          <div className="tracks-btn-container">
                               <div
-                                className="close-layers"
+                                className="tracks-close"
                                 onClick={() => this.props.toggleLayers(this.props.layers.display)}
                                 >
                                 Close

@@ -33,6 +33,28 @@ module.exports = {
             .catch(function(error){
                 console.log(error)
             })
+    },
+
+    flatten: function(array, result) {
+        /*
+         * Utility function. Converts a multidimensional array to the flatten array.
+         * Use to convert geojson coordinates to 1d array that can be passed to any 'Cesium.Cartesian3.fromDegreesArray'
+         *
+         * @param {array} array - nd array
+         * @param {array} result - empty array or undefined, an additional parameter, can be skipped
+         * @return {array} result - 1d array
+         */
+        result === undefined && (result = []);
+
+        for (var i = 0, len = array.length; i < len; i++) {
+            if (Object.prototype.toString.call(array[i]) === '[object Array]') {
+                this.flatten(array[i], result);
+            } else {
+                result.push(array[i]);
+            }
+        }
+
+        return result;
     }
 
 }

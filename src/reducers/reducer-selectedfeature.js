@@ -1,12 +1,12 @@
 const initial = {
-    //feature: null,
-    properties: {}
+    properties: {},
+    name: null
 };
 
 export default function (state = initial, action){
   switch (action.type){
     case 'SELECT_FEATURE':
-      return {properties: action.payload};
+      return action.payload;
     default:
       return state;
   }

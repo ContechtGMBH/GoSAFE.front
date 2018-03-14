@@ -28,11 +28,11 @@ class FeatureInfo extends Component {
               return (
                   <Draggable cancel=".panel-content">
                       <div className="panel-feature-info">
-                          <div className="header">
-                              <div className="title">Feature</div>
+                          <div className="-feature-info-header">
+                              <div className="feature-info-title">Feature</div>
                           </div>
-                          <div className="panel-content">
-                              <table className="properties-table">
+                          <div className="feature-info-panel-content">
+                              <table className="feature-info-properties-table">
                                 <thead>
                                     <tr>
                                         <th>Property</th>
@@ -41,17 +41,32 @@ class FeatureInfo extends Component {
                                 </thead>
                                 <tbody>{rows}</tbody>
                             </table>
-                            <div className="elements-btn-container">
-                              <button className="show-elements" onClick={() => this.props.elementsData(this.props.selectedFeature.properties.id, this.props.dataSources)}>Show elements</button>
-
-                              <button className="show-elements" onClick={() => this.props.neighbourhoodData(this.props.selectedFeature.properties.geometry, this.props.dataSources)}>Show neighbourhood</button>
-                            </div>
-
+                            {(this.props.selectedFeature.name) ?
+                                <div className="elements-btn-container">
+                                  <button
+                                    className="show-elements"
+                                    onClick={() => this.props.elementsData(this.props.selectedFeature.properties.id, this.props.dataSources)}
+                                    >
+                                    Show elements
+                                  </button>
+                                  <button
+                                    className="show-elements"
+                                    onClick={() => this.props.neighbourhoodData(this.props.selectedFeature.properties.geometry, this.props.dataSources)}
+                                    >
+                                    Show neighbourhood
+                                  </button>
+                                </div> : null
+                            }
                           </div>
 
-                          <div className="footer">
-                              <div className="btn-container">
-                                  <div className="close-layers" onClick={() => this.props.toggleFeatureInfo(this.props.featureInfo.display)}>Close</div>
+                          <div className="feature-info-footer">
+                              <div className="feature-info-btn-container">
+                                  <div
+                                    className="feature-info-close"
+                                    onClick={() => this.props.toggleFeatureInfo(this.props.featureInfo.display)}
+                                    >
+                                    Close
+                                  </div>
                               </div>
                           </div>
                       </div>

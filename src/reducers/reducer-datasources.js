@@ -1,26 +1,35 @@
 import Cesium from 'cesium/Source/Cesium';
 import Wkt from 'wicket/wicket'
 const Styles = require('../assets/styles');
+const spatial = require('../utils/spatial');
 
 const initial = {
     dataSources: null,
     loading: true
 };
-
+/*
+ * Load track elements or neighbourhood from the database
+ *
+ * type: 'RECEIVED_ELEMENTS, RECEIVED_NEIGHBOURHOOD'
+ * payload: {object}
+ *
+ * default: {}
+ */
 export default function(state = initial, action) {
+    // payload contains current Cesium.viewer.dataSources object and array of graph nodes
     let dataSourcesObject = action.payload;
     let container = null;
     let data = null;
     switch (action.type) {
         // TRACK ELEMENTS
         case 'RECEIVED_ELEMENTS':
-          container = dataSourcesObject.container;
-          data = dataSourcesObject.entities.data;
+          container = dataSourcesObject.container; // Cesium.viewer.dataSources object
+          data = dataSourcesObject.entities.data; // graph nodes
           for (let entity of data){
-            if (container.getById(entity.e.properties.id)){
+            if (container.getById(entity.e.properties.id)){ // skip if this entity was already loaded
               continue;
             }
-            let coordinatesArray = []
+            let coordinatesArray = [] // coordinatesArray must be 1d
             let properties = Object.assign({}, entity.e.properties);
             let label = entity.e.labels[0]
             if (properties.geometry){
@@ -29,13 +38,13 @@ export default function(state = initial, action) {
               wkt.components.forEach((item)=> {
                 coordinatesArray.push(item.x, item.y)
               })
-              delete properties.geometry;
+              delete properties.geometry; // remove the geometry from properties because it is not necesery to display it in the table
               container.add({
-                id: properties.id,
+                id: properties.id, // must be unique
                 position : Cesium.Cartesian3.fromDegrees(coordinatesArray[0], coordinatesArray[1]),
-                point: Styles[label],
+                point: Styles[label], // point style
                 properties: properties,
-                label: {
+                label: { // label style
                   text: properties.name || properties.id,
                   font : '12pt monospace',
                   style: Cesium.LabelStyle.FILL_AND_OUTLINE,
@@ -60,25 +69,23 @@ export default function(state = initial, action) {
 
         // CURRENTLY ONLY BUILDINGS
         case 'RECEIVED_NEIGHBOURHOOD':
+          // Should be improved
           container = dataSourcesObject.container;
           data = dataSourcesObject.entities.data;
           for (let entity of data){
-            if (container.getById(entity.node.properties.ID)){
+            if (container.getById(entity.node.properties.id)){
               continue;
             }
-            let coordinatesArray = []
+            let coordinatesArray;
             let properties = Object.assign({}, entity.node.properties);
             //let label = entity.node.labels[0]
             if (properties.geometry){
               let wkt = new Wkt.Wkt();
               wkt.read(properties.geometry)
-
-              wkt.components[0][0].forEach((item)=> {
-                coordinatesArray.push(item.x, item.y)
-              })
+              coordinatesArray = spatial.flatten(wkt.toJson().coordinates)
               delete properties.geometry;
               container.add({
-                id: properties.ID,
+                id: properties.id,
                 polygon : {
                   hierarchy: Cesium.Cartesian3.fromDegreesArray(coordinatesArray),
                   material: Cesium.Color.RED.withAlpha(0.8),
