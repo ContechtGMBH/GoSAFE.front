@@ -5,7 +5,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Open Sans', 'sans-serif', monospace;
     height: 100%;
     width: 100%;
     background: linear-gradient(#404142, #F8BC28);
@@ -14,7 +14,7 @@ body {
 .container {
     text-align: center;
     color: #fff;
-    font-family: "sans-serif";
+    font-family: 'Open Sans', 'sans-serif', monospace;
 }
 
 .logo {

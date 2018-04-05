@@ -54,21 +54,22 @@ class Railml extends Component {
                               <div className="railml-title">Railml</div>
                           </div>
                           <div className="railml-panel-content">
-                                <div className="railml-container">
-                                  Input CRS:
-                                  <select className="select-btn" onChange={this.chooseCrs} value={this.state.crs}>
-                                    {crs.map((item, index) => {
-                                      return <option key={index} value={item.epsg}>{item.name}</option>
-                                    })}
-                                  </select>
-                                  <br/>
-                                  <br/>
+                                <table className="railml-container">
+                                  <tr>
+                                    <td>Input CRS:</td>
+                                    <td><select className="railml-select-btn" onChange={this.chooseCrs} value={this.state.crs}>
+                                      {crs.map((item, index) => {
+                                        return <option key={index} value={item.epsg}>{item.name}</option>
+                                      })}
+                                    </select></td>
+                                </tr>
+                                <tr>
+                                  <td>
                                   File:
-                                  <input type="file" accept=".xml, .railml" onChange={this.chooseFile}></input>
-                                  <br/>
-                                  <br/>
-                                  {button}
-                                </div>
+                                  </td>
+                                  <td><input className="railml-file-input" type="file" accept=".xml, .railml" onChange={this.chooseFile}></input></td>
+                                </tr>
+                                </table>
 
                           </div>
 

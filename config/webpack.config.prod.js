@@ -187,7 +187,7 @@ module.exports = {
   plugins: [
       new webpack.DllReferencePlugin({
         context : paths.cesiumSourceFolder,
-          manifest: require(path.join(paths.app, "distdll/cesiumDLL-manifest.json")),
+          manifest: require(path.join(paths.app, "distdll/cesiumDll-manifest.json")),
       }),
 
       // Makes some environment variables available in index.html.

@@ -215,7 +215,7 @@ class Tracks extends Component {
     render() {
         if (this.props.layers.display) {
           return (
-              <Draggable cancel=".layers-row">
+              <Draggable cancel=".tracks-row">
                   <div className="panel-tracks">
                       <div className="tracks-header">
                           <div className="tracks-title">Tracks</div>
@@ -223,15 +223,12 @@ class Tracks extends Component {
                       <div className="tracks-panel-content">
                           <div className="tracks-row">
                                 <div className="tracks-selection">
-                                  <div className="tracks-search">
-                                    <input
-                                      className="tracks-search-input"
-                                      type="text"
-                                      placeholder="Search..."
-                                      onChange={(e) => this.handleTrackSearch(e)}
-                                      value={this.state.trackSearchPhrase}
+                                  <div className="tracks-line-selection">
+                                    <select
+                                      className="tracks-line-selection-dropdown"
                                       >
-                                    </input>
+                                      <option>Line 1</option>
+                                    </select>
                                   </div>
                                   <div className="tracks-list">
                                     <ul>
@@ -271,6 +268,16 @@ class Tracks extends Component {
                                       }
 
                                     </ul>
+                                   </div>
+                                   <div className="tracks-search">
+                                     <input
+                                       className="tracks-search-input"
+                                       type="text"
+                                       placeholder="Search..."
+                                       onChange={(e) => this.handleTrackSearch(e)}
+                                       value={this.state.trackSearchPhrase}
+                                       >
+                                     </input>
                                    </div>
                                 </div>
                                 <div className="tracks-overview">

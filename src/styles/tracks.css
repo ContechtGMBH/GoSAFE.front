@@ -68,14 +68,29 @@
   height: 25px;
 }
 
+.tracks-line-selection {
+  margin-left: 10px;
+  height: 35px;
+  width: 215px;
+}
+
+.tracks-line-selection-dropdown {
+  background: rgba(0, 0, 0, 0.4);
+  color: #f1f1f1;
+  height: 30px;
+  width: 215px;
+  border: none;
+}
+
 
 .tracks-list {
     display: inline-block;
     background: rgba(0, 0, 0, 0.4);
     overflow: scroll;
-    height: 415px;
+    height: 385px;
     width: 215px;
     margin-left: 10px;
+    margin-bottom: 5px;
     vertical-align: top;
 }
 
