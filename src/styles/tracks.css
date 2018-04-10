@@ -129,6 +129,7 @@
   background: #d3d3d3;
   margin-left: -5px;
   border-left: 1px solid #151515;
+  overflow-y: scroll;
 }
 
 .node-properties {

@@ -5,6 +5,7 @@ import Wkt from 'wicket/wicket'
 const initial = {
     dataSources: null,
     tracks: [],
+    lines: [],
     loading: true
 };
 
@@ -21,7 +22,7 @@ export default function(state = initial, action) {
           for (let entity of data){
             let coordinatesArray = []
             let properties = Object.assign({}, entity.n.properties);
-            tracksIds.push(properties.id)
+            tracksIds.push({id: properties.id, line: entity.l.properties.id})
             if (properties.geometry){
               let wkt = new Wkt.Wkt();
               wkt.read(properties.geometry)
@@ -42,10 +43,12 @@ export default function(state = initial, action) {
               })
             }
           }
+          let linesIds = [ ...new Set(tracksIds.map(obj => obj.line)) ]
 
           return {
               dataSources: dataSourcesObject.container,
               tracks: tracksIds,
+              lines: linesIds,
               loading: false
           }
 

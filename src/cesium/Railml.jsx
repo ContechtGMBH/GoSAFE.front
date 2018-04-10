@@ -55,20 +55,22 @@ class Railml extends Component {
                           </div>
                           <div className="railml-panel-content">
                                 <table className="railml-container">
-                                  <tr>
-                                    <td>Input CRS:</td>
-                                    <td><select className="railml-select-btn" onChange={this.chooseCrs} value={this.state.crs}>
-                                      {crs.map((item, index) => {
-                                        return <option key={index} value={item.epsg}>{item.name}</option>
-                                      })}
-                                    </select></td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                  File:
-                                  </td>
-                                  <td><input className="railml-file-input" type="file" accept=".xml, .railml" onChange={this.chooseFile}></input></td>
-                                </tr>
+                                  <tbody>
+                                    <tr>
+                                      <td>Input CRS:</td>
+                                      <td><select className="railml-select-btn" onChange={this.chooseCrs} value={this.state.crs}>
+                                        {crs.map((item, index) => {
+                                          return <option key={index} value={item.epsg}>{item.name}</option>
+                                        })}
+                                      </select></td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                      File:
+                                      </td>
+                                      <td><input className="railml-file-input" type="file" accept=".xml, .railml" onChange={this.chooseFile}></input></td>
+                                    </tr>
+                                  </tbody>
                                 </table>
 
                           </div>

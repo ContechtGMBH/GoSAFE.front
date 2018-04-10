@@ -16,7 +16,7 @@ const myConfig = {
     nodeHighlightBehavior: true,
     linkHighlightBehavior: true,
     highlightDegree: 0,
-    //automaticRearrangeAfterDropNode: true,
+    automaticRearrangeAfterDropNode: true,
     node: {
         color: 'lightgreen',
         size: 1200,
@@ -50,7 +50,8 @@ class Tracks extends Component {
         addNodeView: false,
         deletedRelationships: [],
         trackSearchPhrase: "",
-        filteredTracksList: []
+        filteredTracksList: [],
+        selectedLine: "Irish"
       }
     }
 
@@ -69,7 +70,7 @@ class Tracks extends Component {
        *  @param {event} e - onChange event
        */
       let phrase = e.target.value;
-      let filteredTracks = this.props.tracks.filter((item) => (item) ? (item.includes(phrase)) : false)
+      let filteredTracks = this.props.tracks.filter((item) => (item.id) ? (item.id.includes(phrase)) : false)
       this.setState({filteredTracksList: filteredTracks, trackSearchPhrase: phrase})
     }
 
@@ -212,6 +213,23 @@ class Tracks extends Component {
       }
     }
 
+    /*
+     *  Select a line from the dropdown menu
+     *
+     *  @param {event} e - an onChange event
+     */
+    handleLineChange = (e) => {
+      this.setState({
+        selectedLine: e.target.value,
+        selectedNode: null,
+        selectedTrackId: null,
+        trackRelationship: null,
+        addNodeView: false,
+        graph: {nodes: [], links: []}
+      })
+
+    }
+
     render() {
         if (this.props.layers.display) {
           return (
@@ -226,8 +244,14 @@ class Tracks extends Component {
                                   <div className="tracks-line-selection">
                                     <select
                                       className="tracks-line-selection-dropdown"
+                                      value={this.state.selectedLine}
+                                      onChange={this.handleLineChange}
                                       >
-                                      <option>Line 1</option>
+                                      {
+                                        this.props.lines.map((item,index) => {
+                                          return (<option key={index}>{item}</option>)
+                                        })
+                                      }
                                     </select>
                                   </div>
                                   <div className="tracks-list">
@@ -235,33 +259,33 @@ class Tracks extends Component {
                                       {
                                         (this.state.trackSearchPhrase) ?
 
-                                          this.state.filteredTracksList.map((item,index)=>{
+                                          this.state.filteredTracksList.filter((item) => item.line === this.state.selectedLine).map((item,index)=>{
                                           return (<li
                                                     className={
-                                                                (this.state.selectedTrackId === item) ?
+                                                                (this.state.selectedTrackId === item.id) ?
                                                                   "track-list-item selected-track-item" :
                                                                   "track-list-item"
                                                               }
                                                     key={index}
-                                                    onClick={()=>this.selectTrack(item)}
+                                                    onClick={()=>this.selectTrack(item.id)}
                                                     >
-                                                    {item}
+                                                    {item.id}
                                                   </li>)
                                                 })
 
                                         :
 
-                                          this.props.tracks.map((item,index)=>{
+                                          this.props.tracks.filter((item) => item.line === this.state.selectedLine).map((item,index)=>{
                                           return (<li
                                                     className={
-                                                                (this.state.selectedTrackId === item) ?
+                                                                (this.state.selectedTrackId === item.id) ?
                                                                   "track-list-item selected-track-item" :
                                                                   "track-list-item"
                                                               }
                                                     key={index}
-                                                    onClick={()=>this.selectTrack(item)}
+                                                    onClick={()=>this.selectTrack(item.id)}
                                                     >
-                                                    {item}
+                                                    {item.id}
                                                   </li>)
                                                 })
 
@@ -294,9 +318,8 @@ class Tracks extends Component {
                                       }
                                     </div>
                                     <div className="track-details">
-                                      {
-                                        <span>Selected track: {this.state.selectedTrackId}</span>
-                                      }
+                                        <span>Selected track: {(this.state.selectedTrackId) ? this.state.selectedTrackId : "None"}</span>
+                                        <span style={{"float": "right", "marginRight": "20px"}}>Selected line: {this.state.selectedLine}</span>
                                     </div>
                                 </div>
                                 <div className="node-details">
@@ -395,6 +418,7 @@ function mapStateToProps(state) {
       layers: state.layers,
       dataSources: state.tracks.dataSources,
       tracks: state.tracks.tracks,
+      lines: state.tracks.lines,
       viewer: state.viewer.viewer
     }
 }
