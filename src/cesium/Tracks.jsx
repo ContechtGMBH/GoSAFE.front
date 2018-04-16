@@ -3,38 +3,14 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Draggable from 'react-draggable';
 
-import { Graph } from 'react-d3-graph';
+//import { Graph } from 'react-d3-graph';
+import Graph from 'vis-react';
 
 import AddNewNode from './AddNewNode'
 
-import {toggleLayers} from '../actions/index';
+import {toggleLayers, rotateGraph} from '../actions/index';
 import {getGraph, getAdjacentNodes} from '../utils/dataUtils';
 import {colorSelectedFeature} from '../utils/eventsUtils';
-
-
-const myConfig = {
-    nodeHighlightBehavior: true,
-    linkHighlightBehavior: true,
-    highlightDegree: 0,
-    automaticRearrangeAfterDropNode: true,
-    node: {
-        color: 'lightgreen',
-        size: 1200,
-        strokeColor: '#000000',
-        highlightStrokeColor: '#000000',
-        fontSize: 10,
-        highlightFontSize: 12,
-        labelProperty: 'label',
-        strokeWidth: 1,
-        highlightStrokeWidth: 4
-    },
-    link: {
-        highlightColor: 'red',
-        color: '#808080'
-    },
-    height: 400,
-    width: 655
-}
 
 class Tracks extends Component {
 
@@ -43,7 +19,7 @@ class Tracks extends Component {
       this.state = {
         layerIndex: 0,
         colors: 'default',
-        graph: {nodes: [], links: []},
+        graph: {nodes: [], edges: []},
         selectedNode: null,
         selectedTrackId: null,
         trackRelationship: null,
@@ -81,7 +57,7 @@ class Tracks extends Component {
        *  @param {string} id - a track node id
        */
       getGraph({id: id}, (err,data)=>{
-        this.setState({graph: {nodes: [], links: []}, selectedTrackId: id, selectedNode: null, deletedRelationships: []})
+        this.setState({graph: {nodes: [], edges: []}, selectedTrackId: id, selectedNode: null, deletedRelationships: []})
         this.setState({graph: data.data})
       })
     }
@@ -92,9 +68,10 @@ class Tracks extends Component {
        *
        *  @param {string} node - a curently selected node id
        */
+
       let selectedNode = this.state.graph.nodes.filter((n) => n.id === node)
-      let trackRelationships = this.state.graph.links.filter((item) => { return (
-        (item.source === this.state.selectedTrackId) && (item.target === node))
+      let trackRelationships = this.state.graph.edges.filter((item) => { return (
+        (item.from === this.state.selectedTrackId) && (item.to === node))
       })[0]
       let trackRelationship = "-"
       if (trackRelationships){
@@ -104,7 +81,7 @@ class Tracks extends Component {
         selectedNode: selectedNode[0],
         trackRelationship: trackRelationship,
         addNodeView: false,
-        newNodePropertiesValid: true
+        newNodePropertiesValid: true,
       })
     }
 
@@ -120,10 +97,11 @@ class Tracks extends Component {
        */
       getAdjacentNodes({id: id, label: label}, (err,data) => {
         let nodes = this.state.graph.nodes.concat(data.data.nodes)
-        let links = this.state.graph.links.concat(data.data.links) // (1)
+        let links = this.state.graph.edges.concat(data.data.edges) // (1)
+
         this.state.deletedRelationships.forEach((item) => {
           if (
-            (nodes.some(n => n.id === item.target)) && (nodes.some(n => n.id === item.source)) // (2)
+            (nodes.some(n => n.id === item.to)) && (nodes.some(n => n.id === item.from)) // (2)
           ) {
             links.push(item)
           }
@@ -133,14 +111,14 @@ class Tracks extends Component {
         })
         links = links.filter((link_, index, self) => {
           return index === self.findIndex(li => {
-            return (((li.source === link_.source) && (li.target === link_.target)) ||
-                   ((li.source === link_.target) && (li.target === link_.source))) // (3) ;---DDDDD
+            return (((li.from === link_.from) && (li.to === link_.to)) ||
+                   ((li.from === link_.to) && (li.to === link_.from))) // (3) ;---DDDDD
           })
         })
         this.setState({
           graph: {
             nodes: nodes,
-            links: links
+            edges: links
           }
         })
       })
@@ -154,12 +132,12 @@ class Tracks extends Component {
        *  @param {string} node - a curently selected node id
        */
       let filteredNodes = this.state.graph.nodes.filter((n) => n.id !== node)
-      let filteredRelationships = this.state.graph.links.filter((item) => ((item.source !== node) && (item.target !== node) ))
-      let deletedRelationships = this.state.graph.links.filter((item) => ((item.source === node) || (item.target === node) )) // (1)
+      let filteredRelationships = this.state.graph.edges.filter((item) => ((item.from !== node) && (item.to !== node) ))
+      let deletedRelationships = this.state.graph.edges.filter((item) => ((item.from === node) || (item.to === node) )) // (1)
       this.setState({
         graph: {
           nodes: filteredNodes,
-          links: filteredRelationships
+          edges: filteredRelationships
         },
         selectedNode: null,
         trackRelationship: null,
@@ -196,17 +174,16 @@ class Tracks extends Component {
       this.setState({
         addNodeView: !currentState // (1)
       })
-
       if (created){ // (2)
-        this.setState({graph: {nodes: [], links: []}})
+        this.setState({graph: {nodes: [], edges: []}})
         let graph = this.state.graph;
         graph.nodes = graph.nodes.concat(created.node)
         let relationship = {
-          source: this.state.selectedNode.id,
-          target: created.node.properties.id,
+          from: this.state.selectedNode.id,
+          to: created.node.properties.id,
           label: created.relationship
         }
-        graph.links = graph.links.concat(relationship)
+        graph.edges = graph.edges.concat(relationship)
         this.setState({
           graph: graph
         })
@@ -225,13 +202,39 @@ class Tracks extends Component {
         selectedTrackId: null,
         trackRelationship: null,
         addNodeView: false,
-        graph: {nodes: [], links: []}
+        graph: {nodes: [], edges: []}
       })
 
     }
 
+    graphDirection = (direction) => {
+      this.props.rotateGraph(direction)
+    }
+
     render() {
         if (this.props.layers.display) {
+          let options = {
+            physics: false,
+            layout: {
+                hierarchical: this.props.graphConfig
+            },
+            edges: {
+                color: "#000000",
+                length: 300,
+                font: {
+                  background: "#d3d3d3",
+                  align: "middle"
+                },
+            },
+            nodes: {
+              shape: "circle",
+              widthConstraint: { minimum: 75, maximum: 75},
+              font: {
+                color: "#ffffff"
+              }
+            }
+          }
+          let that = this;
           return (
               <Draggable cancel=".tracks-row">
                   <div className="panel-tracks">
@@ -306,20 +309,39 @@ class Tracks extends Component {
                                 </div>
                                 <div className="tracks-overview">
                                     <div className="tracks-graph">
-                                      {
-                                        (this.state.graph.nodes.length) ?
-                                        <Graph
-                                          id='graph-id'
-                                          data={this.state.graph}
-                                          config={myConfig}
-                                          onClickNode={this.onClickNode}
-                                          /> :
-                                          null
+                                        {
+                                          <Graph
+                                          graph={this.state.graph}
+                                          options={options}
+                                          events={{
+                                            select: function(event){
+                                              let {nodes, edges} = event;
+                                              if (nodes){
+                                                that.onClickNode(nodes[0])
+                                              }
+                                            },
+                                            configChange: function(event){
+                                              console.log(event)
+                                            }
+                                          }}
+                                          />
                                       }
                                     </div>
                                     <div className="track-details">
-                                        <span>Selected track: {(this.state.selectedTrackId) ? this.state.selectedTrackId : "None"}</span>
-                                        <span style={{"float": "right", "marginRight": "20px"}}>Selected line: {this.state.selectedLine}</span>
+                                        <div className="tracks-graph-buttons">
+                                              <button
+                                                onClick={()=>this.graphDirection('ROTATE_GRAPH_LR')}
+                                                title="LEFT-RIGHT DIRECTION"
+                                                >
+                                                &#8649;
+                                              </button>
+                                              <button
+                                                onClick={()=>this.graphDirection('ROTATE_GRAPH_UD')}
+                                                title="UP-DOWN DIRECTION"
+                                                >
+                                                &#8650;
+                                              </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="node-details">
@@ -348,35 +370,36 @@ class Tracks extends Component {
                                             })
                                           }
                                         </ul>
-                                        <div className="track-relationship">
-                                          <div className="node-details-header">Track relationship</div>
-                                          <span style={{color: '#ff6666'}}>
-                                          {
-                                            this.state.trackRelationship
-                                          }
-                                          </span>
-                                        </div>
+
                                         <div className="node-actions">
                                           <div className="node-details-header">Actions</div>
                                           <button
                                             onClick={()=>this.expandNode(this.state.selectedNode.id, this.state.selectedNode.label)}
+                                            title="EXPAND"
                                             >
-                                            Expand
+                                            &#9741;
                                           </button>
                                           <button
                                             onClick={()=>this.removeNode(this.state.selectedNode.id)}
+                                            title="DELETE"
                                             >
-                                            Remove
+                                            &#x2718;
                                           </button>
                                           {
                                             (this.state.selectedNode.label === 'Track') ?
-                                              <button onClick={()=>this.zoomToNode()}>Zoom</button> :
+                                              <button
+                                                onClick={()=>this.zoomToNode()}
+                                                title="ZOOM"
+                                                >
+                                                &#x1F50D;
+                                              </button> :
                                               null
                                             }
                                           <button
                                             onClick={()=>this.toggleAddNode()}
+                                            title="ADD NODE"
                                             >
-                                            Add
+                                            &#128932;
                                           </button>
                                         </div>
                                       </div> :
@@ -419,12 +442,16 @@ function mapStateToProps(state) {
       dataSources: state.tracks.dataSources,
       tracks: state.tracks.tracks,
       lines: state.tracks.lines,
-      viewer: state.viewer.viewer
+      viewer: state.viewer.viewer,
+      graphConfig: state.graphConfig
     }
 }
 
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({toggleLayers: toggleLayers}, dispatch)
+    return bindActionCreators({
+      toggleLayers: toggleLayers,
+      rotateGraph: rotateGraph
+    }, dispatch)
 }
 
 

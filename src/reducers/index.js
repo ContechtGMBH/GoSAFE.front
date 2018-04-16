@@ -12,6 +12,7 @@ import StatisticsReducers from './reducer-statistics';
 import DatasetsReducers from './reducer-datasets';
 import RailmlReducers from './reducer-railml';
 import TrackReducers from './reducer-tracks';
+import GraphConfigReducers from './reducer-graph-config';
 
 export const allReducers = combineReducers({
   viewer: ViewerReducers,
@@ -25,7 +26,8 @@ export const allReducers = combineReducers({
   statistics: StatisticsReducers,
   datasets: DatasetsReducers,
   railml: RailmlReducers,
-  tracks: TrackReducers
+  tracks: TrackReducers,
+  graphConfig: GraphConfigReducers
 
 });
 

@@ -8,8 +8,8 @@
   border-width: 1px;
   border-style: solid;
   color: #fff;
-  width: 1100px;
-  height: 575px;
+  width: 1400px;
+  height: 675px;
   z-index: 10;
   position: fixed;
   top: 15%;
@@ -40,12 +40,12 @@
 
 .tracks-panel-content {
     margin: 0 auto;
-    height: 450px;
+    height: 550px;
 }
 
 .tracks-row {
 
-    height: 450px;
+    height: 550px;
 
 }
 
@@ -87,7 +87,7 @@
     display: inline-block;
     background: rgba(0, 0, 0, 0.4);
     overflow: scroll;
-    height: 385px;
+    height: 485px;
     width: 215px;
     margin-left: 10px;
     margin-bottom: 5px;
@@ -97,14 +97,15 @@
 .tracks-overview {
     display: inline-block;
     background: #f1f1f1; /*rgba(0, 0, 0, 0.4);*/
-    height: 450px;
-    width: 655px;
+    height: 550px;
+    width: 955px;
     margin-left: 10px;
     vertical-align: top;
 }
 
 .tracks-graph {
-  height: 400px;
+  height: 500px;
+  width: 950px;
 }
 
 .track-details {
@@ -123,11 +124,11 @@
 .node-details {
   display: inline-block;
   vertical-align: top;
-  height: 450px;
+  height: 550px;
   width: 200px;
   color: #151515;
   background: #d3d3d3;
-  margin-left: -5px;
+  margin-left: 0px;
   border-left: 1px solid #151515;
   overflow-y: scroll;
 }
@@ -269,4 +270,10 @@ ul {
 :focus {
   outline-color: transparent;
   outline-style: none;
+}
+
+.tracks-graph-buttons {
+  width: 50%;
+  height: 100%;
+  margin-left: 10px;
 }
