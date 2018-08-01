@@ -74,3 +74,18 @@ export const toggleRailml = (condition) => {
         payload: !condition
     }
 }
+
+export const toggleRealtime = (condition) => {
+    /*
+     * UI utility for open/close the 'Realtime' widget
+     *
+     * @param {boolean} condition - if true it's visible, if false invisible. This action changes that state.
+     */
+     if (condition) {
+       closeFeatureInfoBox()
+     }
+    return {
+        type: 'TOGGLE_REALTIME',
+        payload: !condition
+    }
+}

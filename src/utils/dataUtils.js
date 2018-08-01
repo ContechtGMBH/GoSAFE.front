@@ -113,5 +113,36 @@ module.exports = {
           .catch(function(error){
               console.log(error)
           })
+    },
+
+    getDatasets: function(callback){
+      /*
+       * Get information about available ML datasets.
+       *
+       * @callback callback - a callback to run after GET request is resolved. Handles error and response.
+       */
+      axios.get('http://localhost:1111/api/v1/data/datasets')
+          .then(function(response){
+              callback(null, {data: response.data})
+          })
+          .catch(function(error){
+              console.log(error)
+          })
+    },
+
+    prediction: function(data, callback){
+      /*
+       * Predict
+       *
+       * @param {string} data - an object with...
+       * @callback callback - a callback to run after GET request is resolved. Handles error and response.
+       */
+      axios.post('http://localhost:1111/api/v1/data/predict', data)
+          .then(function(response){
+              callback(null, {data: response.data})
+          })
+          .catch(function(error){
+              console.log(error)
+          })
     }
 }

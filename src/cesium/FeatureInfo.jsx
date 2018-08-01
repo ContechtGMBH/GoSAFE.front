@@ -41,7 +41,7 @@ class FeatureInfo extends Component {
                                 </thead>
                                 <tbody>{rows}</tbody>
                             </table>
-                            {(this.props.selectedFeature.name) ?
+                            {(this.props.selectedFeature.name === 'Track') ?
                                 <div className="elements-btn-container">
                                   <button
                                     className="show-elements"

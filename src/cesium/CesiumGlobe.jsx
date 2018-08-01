@@ -12,10 +12,9 @@ import Tracks from "./Tracks";
 import FeatureInfo from './FeatureInfo';
 import Statistics from './Statistics';
 import Railml from './Railml';
+import Realtime from './Realtime';
 
 import {getBasicData, getExtendedData, toggleFeatureInfo, selectFeature, tracksData, shareViewer} from '../actions/index'
-
-import {getCurrentTrains} from '../utils/dataUtils';
 
 const eventsUtils = require('../utils/eventsUtils');
 
@@ -65,30 +64,6 @@ class CesiumGlobe extends Component {
         props.tracksData(this.viewer.entities);
 
         const scene = this.viewer.scene;
-
-        // REALTIME
-        getCurrentTrains( (error, trains) => {
-          trains.data.forEach((item) => {
-            let code = item["TrainCode"][0]
-            let position = {
-              x: parseFloat(item["TrainLongitude"][0]),
-              y: parseFloat(item["TrainLatitude"][0])
-            }
-            if (position.x && position.y){
-
-              let pin = new Cesium.PinBuilder().fromMakiIconId('rail', Cesium.Color.ROYALBLUE, 48)
-              this.viewer.entities.add({
-                id : code,
-                position : Cesium.Cartesian3.fromDegrees(position.x, position.y),
-                properties: {},
-                billboard : {
-                  image : pin,
-                  verticalOrigin : Cesium.VerticalOrigin.BOTTOM
-                }
-              });
-            }
-          })
-        } )
 
         // DELFT 3D
         /*
@@ -202,6 +177,7 @@ class CesiumGlobe extends Component {
                 <FeatureInfo/>
                 <Statistics/>
                 <Railml />
+                <Realtime />
                 <div className="cesiumGlobeWrapper" style={containerStyle}>
                     <div className="cesiumWidget" ref={element => this.cesiumContainer = element} style={widgetStyle}>
                         {contents}

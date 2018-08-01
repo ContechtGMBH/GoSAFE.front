@@ -1,4 +1,4 @@
-.panel-statistics {
+.panel-realtime {
   position: relative;
   top: 35px;
   background: rgba(42, 42, 42, 0.9);
@@ -19,12 +19,12 @@
   */
 }
 
-.statistics-header {
+.realtime-header {
     margin: 0 auto;
     height: 35px;
 }
 
-.statistics-title {
+.realtime-title {
     margin:  0 auto;
     width: 50%;
     text-align: center;
@@ -33,60 +33,24 @@
     line-height: 35px;
 }
 
-.statistics-panel-content {
+.realtime-panel-content {
     margin: 0 auto;
     height: 450px;
 }
 
-.statistics-chart-controls {
-  display: inline-block;
-  vertical-align:top;
-  padding: 5%;
-  width: 40%;
-  height: 80%;
-  background: rgba(0, 0, 0, 0.4);
-}
 
-.combobox {
-  background: rgba(42, 42, 42, 0.9);
-  color: #ffffff;
-  width: 125px;
-  height: 35px;
-}
-
-.statistics-chart {
-  display: inline-block;
-  padding: 5%;
-  width: 40%;
-  height: 80%;
-  background: rgba(0, 0, 0, 0.4);
-
-}
-
-.axisWhite line{
-  stroke: White;
-}
-
-.axisWhite path{
-  stroke: White;
-}
-
-.axisWhite text{
-  fill: White;
-}
-
-.statistics-footer {
+.realtime-footer {
     margin: 0 auto;
     height: 50px;
 }
 
-.statistics-btn-container{
+.realtime-btn-container{
     position:relative;
     width: 100%;
     height: 100%;
 }
 
-.statistics-close {
+.realtime-close {
     position:absolute;
     top:50%;
     left:50%;
@@ -102,31 +66,40 @@
 }
 
 
-.statistics-close:hover {
+.realtime-close:hover {
   background-color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
 }
 
-.predict-table {
-  width: 400px;
-  height: 300px;
+.realtime-table {
+  height: 90%;
+  width: 100%;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.4);
   overflow-y: scroll;
 }
 
-.predict-table::-webkit-scrollbar, .layers-overview::-webkit-scrollbar {
+.realtime-table::-webkit-scrollbar {
     width: 12px;
 }
 
-.predict-table::-webkit-scrollbar-track, .layers-overview::-webkit-scrollbar-track {
+.realtime-table::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     border-radius: 10px;
 }
 
-.predict-table::-webkit-scrollbar-thumb, .layers-overview::-webkit-scrollbar-thumb {
+.realtime-table::-webkit-scrollbar-thumb {
     border-radius: 0px;
     -webkit-box-shadow: inset 0 0 9px rgba(255,255,255,0.5);
 }
 
-.predict-table::-webkit-scrollbar-corner, .layers-overview::-webkit-scrollbar-corner  {
+.realtime-table::-webkit-scrollbar-corner {
     color: rgba(0,0,0,0.5);
+}
+
+.realtime-refresh-btn {
+  width: 100%;
+  height: 35px;
+  color: #d3d3d3;
+  background-color: #151515;
 }

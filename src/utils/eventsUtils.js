@@ -28,6 +28,8 @@ module.exports = {
             highlited.feature.id.polygon.material.color = highlited.color;
           } else if (highlited.feature.id.point) {
             highlited.feature.id.point.color = highlited.color;
+          } else if (highlited.feature.id.billboard) {
+            highlited.feature.id.billboard.color = highlited.color;
           }
           highlited.feature = undefined;
         }
@@ -59,14 +61,17 @@ module.exports = {
                 highlited.color = feature.id.point.color
               }
               feature.id.point.color = Cesium.Color.CYAN
+            } else if (feature.id.billboard) {
+              if (feature.id.billboard.color !== Cesium.Color.CYAN){
+                highlited.color = feature.id.billboard.color
+              }
+              feature.id.billboard.color = Cesium.Color.CYAN
             }
 
         } else if (Cesium.defined(feature) && (feature instanceof Cesium.Cesium3DTileFeature)) { // (2)
             highlited.tile = feature;
             highlited.colorTile = feature.color;
             feature.color = Cesium.Color.CYAN;
-
-            //console.log(feature.getPropertyNames())
 
         }
 
@@ -83,6 +88,8 @@ module.exports = {
           highlited.feature.id.polygon.material.color = highlited.color;
         } else if (highlited.feature.id.point) {
           highlited.feature.id.point.color = highlited.color;
+        } else if (highlited.feature.id.billboard) {
+          highlited.feature.id.billboard.color = highlited.color;
         }
         highlited.feature = undefined;
       }
